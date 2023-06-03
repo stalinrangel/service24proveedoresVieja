@@ -1,0 +1,118 @@
+.custom-ion-content{
+    --background:transparent;
+    background: transparent;
+}
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 70px;
+    margin: auto;
+    border-radius: 100%;
+    width: 290px;
+    height: 290px;
+    box-shadow: 0px 0px 0px 2000px #061f33;
+    z-index: -1;
+    border: 5px solid #fff;
+}
+img{
+    height: 180px;
+    width: 180px;
+    border-radius: 50em;
+    border: 5px solid #fff;
+}
+.icon-take{
+    font-size: 55px;
+    text-align: center;
+    color: #fff;
+}
+ion-col{
+    text-align: center;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+}
+.icon-conf{
+    font-size: 25px;
+    color: #fff;
+}
+.content-text{
+    padding: 0px 25px;
+    font-size: 11px;
+    font-family: muli-regular;
+    text-align: justify;
+    p{
+        margin-bottom: 5px;
+        margin-top: 0px;
+    }
+}
+h2{
+    margin: 0px;
+    margin-left: 10px;
+    font-size: 20px;
+    color: #fff !important;
+}
+ion-icon{
+    color: #fff !important;
+}
+/*.custom-ion-content{
+    --background:transparent;
+}
+ion-content{
+	//--background: #073763;
+  //background: #073763;
+  --background:transparent;
+  background: transparent;
+
+  background-image: url('/assets/background.png');
+  background-repeat:repeat;
+  background-size: cover;
+}
+.content-img{
+	background: linear-gradient(0deg, #0279fb52, rgba(9, 61, 109, 0.95));
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50em;
+    margin: auto;
+}
+img{
+	height: 180px;
+    width: 180px;
+    border-radius: 50em;
+    border: 5px solid #fff;
+}
+.icon-take{
+	font-size: 55px;
+    text-align: center;
+    color: #fff;
+}
+ion-col{
+	text-align: center;
+}
+ion-row{
+	display: flex;
+	align-items: center;
+}
+.icon-conf{
+	font-size: 25px;
+	color: #fff;
+}
+.content-text{
+	padding: 10px 25px;
+    font-size: 12px;
+    font-family: muli-regular;
+    text-align: justify;
+    p{
+    	margin-bottom: 5px;
+    }
+}
+h2{
+	margin: 0px;
+    margin-left: 10px;
+    font-size: 20px;
+}*/

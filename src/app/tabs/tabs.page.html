@@ -1,0 +1,20 @@
+<ion-tabs tabsHighlight="false" (ionTabsDidChange)="setTab()">
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab1" (click)="openTab('tab1', $event)">
+      <ion-icon name="arrow-dropup" class="custom-inicio"></ion-icon>
+      <ion-label class="bullet-icon" *ngIf="currentTab == 'tab1'">·</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="arrow-dropup" class="custom-solicitud"></ion-icon>
+      <ion-label class="bullet-icon" *ngIf="currentTab == 'tab2'">·</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="arrow-dropup" class="custom-perfil"></ion-icon>
+      <ion-label class="bullet-icon" *ngIf="currentTab == 'tab3'">·</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

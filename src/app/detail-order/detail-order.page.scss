@@ -1,0 +1,92 @@
+.content-profile{
+	text-align: center;
+	padding-top: 25px;
+	img{
+		height: 100px;
+    	width: 100px;
+    	border-radius: 50%;
+    	object-fit: cover;
+    }
+}
+.content-info{
+	position: relative;
+	.title {
+		color: #000000;
+		font-family: ('Montserrat-Bold');
+		margin: 10px 0px 3px 0px;
+    	font-size: 15px; 
+    	padding: 0px 16px;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	.order{
+		color: #007AFF;
+		font-family: ('Montserrat-Medium');
+		margin: 0px 0px 8px 0px;
+    	font-size: 13px;
+	}
+	.address{
+		font-family: "Montserrat-Medium";
+	    margin: 0px 0px;
+	    color: #4D4D4D;
+	    font-size: 13px;
+	    padding: 0px 16px;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+}
+.sc-ion-back-button-md{
+	margin-right: 0px;
+    width: 44px;
+}
+.sc-ion-back-button-md{
+	padding: 0px;
+    margin: 0px;
+}
+.content-infoP{
+	color: #4D4D4D;
+	font-family: 'Muli-Regular';
+	padding: 15px 20px;
+	p{
+		font-size: 15px;
+		span {
+			color: #000000;
+		}
+	}
+}
+.btn-init{
+	--background: #007AFF;
+	width: 90%;
+    margin: auto;
+}
+.btn-init1{
+	--background: #D32F2F !important;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+}
+ion-icon {
+  &[class*="custom1-"] {
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 13px;
+    vertical-align: baseline;
+    color: transparent !important;
+  }
+  &[class*="custom1-map"] {
+  	background: url("/assets/icon/icono-locacion.svg") no-repeat 50% 50%;
+    background-size: contain;
+  }
+}
+.icon-star{
+  color: #cccccc;
+  font-size: 21px;
+  margin: 0px 4px;
+}
+ion-icon.filled {     
+  color: #ffeb3b;     
+}

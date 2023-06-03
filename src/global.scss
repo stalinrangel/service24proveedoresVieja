@@ -1,0 +1,224 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+.button-solid, .button-solid.activated{
+	--box-shadow: none;
+}
+.btn-init{
+	min-height: 44px;
+	font-family: ('Roboto');
+	font-size: 16px;
+  letter-spacing: normal;
+  --border-radius: 3px;
+  color: #ffffff;
+  --background: #031F33;
+}
+.btn-init2{
+  min-height: 44px;
+  font-family: ('Roboto');
+  font-size: 15px;
+  letter-spacing: normal;
+  --border-radius: 3px;
+}
+ion-title{
+    width: 100%;
+    font-family: ('Montserrat-Bold');
+}
+.header-ios ion-toolbar:last-child {
+    --border-width: 0;
+}
+.loading-wrapper{
+    padding: 10px !important;
+    line-height: 10px;
+}
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 30px;
+    height: 1em;
+  }
+
+  &[class*="custom-notify"] {
+  	font-size: 25px !important;
+    mask-image: url('/assets/icon/icono-notificacion.svg');
+    color: var(--ion-color-primary) !important;
+  }
+  &[class*="custom-filter"] {
+    color: #fff;
+    font-size: 22px !important;
+    mask-image: url('/assets/icon/icono-filtro.svg');
+  }
+  &[class*="custom-contact"] {
+    font-size: 25px !important;
+    mask-image: url('/assets/icon/icono-contactos.svg');
+  }
+  &[class*="custom-map1"] {
+    color: var(--ion-color-secondary) !important;
+    mask-image: url('/assets/icon/icono-locacion.svg');
+  }
+}
+.padding-space{
+  padding: 20px;
+}
+.action-sheet-button.sc-ion-action-sheet-md,.action-sheet-button.sc-ion-action-sheet-ios{
+  font-family: "Muli-Regular";
+  font-size: 15px;
+}
+.action-sheet-group.sc-ion-action-sheet-md:last-child, .action-sheet-group.sc-ion-action-sheet-ios:last-child{
+  background-color: #033b67;
+  --color: #fff;
+  --button-color: #fff !important;
+}
+.action-sheet-group {
+  overflow: auto !important;
+}
+.spinner-dots.sc-ion-loading-md, .spinner-dots.sc-ion-loading-ios{
+  color: #031F33;
+}
+.spinner-dots, .action-sheet-button.sc-ion-action-sheet-ios{
+    color: #031F33 !important;
+}
+.rating-calification{ 
+  rating {
+    ion-icon {
+      &.filled {
+        color: #ffeb3b;
+      }
+    }
+  }
+}
+.padding-space{
+  padding: 20px;
+}
+.select-placeholder{
+  --opacity: 0.5;
+  opacity: 0.5;
+}
+.alert-title.sc-ion-alert-md, .alert-title.sc-ion-alert-ios {
+  color: #033b67;
+  font-size: 18px;
+  font-family: ('Montserrat-Bold');
+}
+.alert-message.sc-ion-alert-md, .alert-message.sc-ion-alert-ios, .alert-checkbox-label.sc-ion-alert-md, .alert-checkbox-label.sc-ion-alert-ios{
+  font-family: ('Muli-Regular');
+  color: #4D4D4D;
+}
+.refresher-md .refresher-pulling-icon, .refresher-md .refresher-pulling-text, .refresher-md .refresher-refreshing-icon, .refresher-md .refresher-refreshing-text,
+.refresher-ios .refresher-pulling-icon, .refresher-ios .refresher-pulling-text, .refresher-ios .refresher-refreshing-icon, .refresher-ios .refresher-refreshing-text{
+  color: #033b67 !important;
+  --color: #033b67 !important;
+  font-size: 14px;
+}
+.alert-radio-label{
+  text-overflow: initial !important;
+  font-size: 15px !important;
+  white-space: normal !important;
+  font-family: ('Muli-Regular');
+}
+.alert-tappable.sc-ion-alert-md, .alert-tappable.sc-ion-alert-ios{
+  height: 58px !important;
+}
+.sc-ion-alert-md-h, .sc-ion-alert-ios-h{
+  --width: 90%;
+  --max-width: 380px;
+}
+.sc-ion-segment-ios-h.ion-color.sc-ion-segment-ios-s > ion-segment-button, .alert-radio-label.sc-ion-alert-ios{
+  color: #4D4D4D;
+}
+.sc-ion-loading-ios-h{
+  color: #000;
+}
+.toast-scheme{
+  --background: #000;
+  --color: #fff;
+}
+.calification-modal-css .modal-wrapper {
+  height: 80%; 
+  width: 90%;
+  padding: 16px;
+}
+.cancel-modal-css .modal-wrapper {
+  height: 60%; 
+  width: 90%;
+  padding: 16px;
+}
+.camera-modal-css .modal-wrapper {
+  background: transparent;
+}
+.actionCamera{
+  .action-sheet-group.sc-ion-action-sheet-md:last-child{
+    background-color: #fff !important;
+    --color: #000;
+  }
+  .action-sheet-group.sc-ion-action-sheet-ios:last-child{
+    background-color: #fff !important;
+    --color: #000;
+  }  
+}
+ion-picker{
+  --ion-background-color: #F2F2F2;
+}
+.tool-segment{
+  --padding-top: 0px !important;
+  --padding-start: 0px !important;
+  --padding-right: 0px !important;
+  --padding-end: 0px !important;
+}
+.sc-ion-segment-ios-h.sc-ion-segment-ios-s > ion-segment-button {
+  font-size: 15px !important;
+}
+.picker-opt.picker-opt-disabled, .sc-ion-picker-ios-h{
+  color: #000;
+  opacity: 1;
+}
+.tutorial-modal-css .modal-wrapper{
+  width: 100%;
+  height: 100%;
+}
+.tutorial-modal-css .swiper-container-horizontal > .swiper-pagination-bullets{
+  bottom: 14% !important;
+}
+.tutorial-modal-css .swiper-pagination-bullet{
+  background: #033b67;
+}
+.tutorial-modal-css .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
+  margin: 0px 5px;
+}
+.icon-bagde{
+  width: 11px;
+  height: 11px;
+  background: #F44336;
+  position: absolute;
+  right: 8px;
+  z-index: 9999999;
+  top: 3px;
+  border-radius: 50em;
+}

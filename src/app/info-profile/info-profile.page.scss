@@ -1,0 +1,67 @@
+.custom-ion-content{
+    --background:transparent;
+}
+ion-content{
+	--background: #073763;
+  background: #073763;
+}
+.content-img{
+	  //background: linear-gradient(0deg, #0279fb52, rgba(9, 61, 109, 0.95));
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50em;
+    margin: auto;
+}
+img{
+    height: 180px;
+    width: 180px;
+    border-radius: 50em;
+    border: 5px solid #fff;
+}
+.icon-take{
+    font-size: 55px;
+    text-align: center;
+    color: #fff;
+}
+ion-col{
+    text-align: center;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+}
+.icon-conf{
+    font-size: 25px;
+    color: #fff;
+}
+.content-text{
+  padding: 10px 25px;
+  font-size: 12px;
+  font-family: muli-regular;
+  text-align: justify;
+  p{
+    margin-bottom: 5px;
+  }
+}
+h2{
+  margin: 0px;
+  margin-left: 10px;
+  font-size: 20px;
+  color: #fff;
+}
+ion-icon{
+  color: #fff;
+}
+.btn-register{
+  width: 75%;
+  margin: auto;
+  --box-shadow: 0 3px 1px -2px rgba(255,255,255,0.2),0 2px 2px 0 rgba(255,255,2555,0.14),0 1px 5px 0 rgba(255,255,255,0.12) !important;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.20);
+  border-style: solid;
+  border-radius: 3px;
+  font-size: 13px;
+}

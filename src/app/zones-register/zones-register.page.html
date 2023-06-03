@@ -1,0 +1,34 @@
+<ion-content class="ion-padding">
+	<ion-button class="btn-close" (click)="closeModal()">
+		<ion-icon slot="icon-only" name="close"></ion-icon>
+	</ion-button>
+	<br>
+	<div class="or-spacer">
+	  <div class="mask"></div>
+	  <span>Ubicación</span>
+	</div>
+	<!--div>
+		<p class="text-dir" *ngIf="myZone != ''"><ion-icon name="arrow-dropup" class="custom-map"></ion-icon> {{myZone.nombre}}</p>
+	</div-->
+	<div class="ion-padding">
+		<p class="text-dir2">Selecciona tu ubicación</p>
+		<div>
+			<ion-select [(ngModel)]="country_id" class="select-input" cancelText="Cancelar" placeholder="Selecciona tu país" interface="action-sheet" mode="md" (ionChange)="setCountry(country_id)">
+			  <ion-select-option [value]="item" *ngFor="let item of countries">{{item.nombre}}</ion-select-option>
+			</ion-select>
+		</div>
+	  	<ion-grid class="ion-no-padding">
+		  <ion-row>
+		    <ion-col size="12" *ngFor="let zone of zones">
+		    	<div class="content-colonia">
+		    		<p class="text-dir3" (click)="zone.show=!zone.show">{{zone.nombre}}</p>
+		    		<ion-icon class="icon-arrow" name="arrow-round-forward" *ngIf="zone.show" (click)="zone.show=!zone.show"></ion-icon><ion-icon name="arrow-round-down" class="icon-arrow" *ngIf="!zone.show" (click)="zone.show=!zone.show"></ion-icon>
+		    	</div>
+		      	<div class="box-cat" [hidden]="zone.show" *ngFor="let item of zone.zonas" (click)="setZone(item)">
+		        	{{item.nombre}}
+		      	</div>
+		    </ion-col>
+		  </ion-row>
+		</ion-grid>
+	</div>	
+</ion-content>

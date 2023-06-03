@@ -1,0 +1,22 @@
+<ion-content class="ion-padding">
+	<ion-button class="btn-close" (click)="closeModal()">
+		<ion-icon slot="icon-only" name="close"></ion-icon>
+	</ion-button>
+	<h2 class="title-modal">¿Se completó la solicitud #{{Calification.pedido_id}} de manera satisfactoria?</h2>
+	<p class="info-modal">Por favor, deje una calificación para que sepamos cómo te sientes!</p>
+	<div class="rating-calification">
+		<rating [(ngModel)]="Calification.puntaje"
+		        size="small"
+		        (ngModelChange)="onModelChange($event)">
+		</rating>
+	</div>
+	<ion-item lines="none" class="item-info">
+	  <ion-textarea placeholder="Agrega un comentario..." [(ngModel)]="Calification.comentario" class="area-info" rows="3" cols="20"></ion-textarea>
+	</ion-item>
+	<img class="img-service" src="{{image_cal}}" *ngIf="image_cal != ''">
+	<ion-button expand="block" fill="outline" color="tertiary" class="ion-text-capitalize btn-init2" (click)="presentActionSheet()">
+		<ion-icon slot="start" md="md-images" ios="md-images" class="icon-cal"></ion-icon>
+		<p>Añadir imagen del servicio</p>
+	</ion-button>
+	<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="sendCalification()">Enviar</ion-button>
+</ion-content>

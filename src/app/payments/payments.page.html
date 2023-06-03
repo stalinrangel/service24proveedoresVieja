@@ -1,0 +1,298 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Pagos
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="tool-segment">
+	  <ion-segment [(ngModel)]="type" value="track" color="light">
+	    <ion-segment-button value="track" mode="md">
+	      <ion-label>Pendientes</ion-label>
+	    </ion-segment-button>
+	    <ion-segment-button value="histories" mode="md">
+	      <ion-label>Pagados</ion-label>
+	    </ion-segment-button>
+	  </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+	<div *ngIf="type === 'track'">
+		<ion-list *ngIf="pendiente">
+			<!--ion-button expand="block" class="ion-text-capitalize btn-init" #checkout_button id="checkout_button" (click)="pay()">Pago</ion-button-->
+			<div *ngFor="let item of pendiente;let even = even" [style.background]="even? '#FFFFFF' : '#F2F2F2'" style="padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item">Razón de pago</p>
+			          <p class="info-item">{{item.observacion}}</p>
+			        </ion-col>
+			        <ion-col size="5">
+			          <p class="title-item ion-text-right">Fecha de pago</p>
+			          <p class="info-item ion-text-capitalize ion-text-right">{{item.created_at | date: "dd-MM-yyyy"}}</p>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item">Importe a pagar</p>
+			          <p class="info-item">${{item.monto | number: '1.2-2'}}</p>
+			        </ion-col>
+			        <ion-col size="6">
+			          <p class="title-item ion-text-right">Próxima fecha de pago</p>
+			          <p class="info-item ion-text-capitalize ion-text-right">{{item.prox_pago | date: "dd-MM-yyyy"}}</p>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<p *ngIf="showEmpty1" class="text-empty">No tienes pagos pendientes</p>
+		</ion-list>
+		<ion-list *ngIf="!pendiente">
+			<div style="background-color:#FFFFFF;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#F2F2F2;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#FFFFFF;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#F2F2F2;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+		</ion-list>
+	</div>
+	<div *ngIf="type === 'histories'">
+		<ion-list *ngIf="pagado">
+			<div *ngFor="let item of pagado;let even = even" [style.background]="even? '#FFFFFF' : '#F2F2F2'" style="padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item">Razón de pago</p>
+			          <p class="info-item">{{item.observacion}}</p>
+			        </ion-col>
+			        <ion-col size="5">
+			          <p class="title-item ion-text-right">Fecha de pago</p>
+			          <p class="info-item ion-text-capitalize ion-text-right">{{item.created_at | date: "dd-MM-yyyy"}}</p>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item">Importe pagado</p>
+			          <p class="info-item">${{item.monto | number: '1.2-2'}}</p>
+			        </ion-col>
+			        <ion-col size="6">
+			          <p class="title-item ion-text-right">Próxima fecha de pago</p>
+			          <p class="info-item ion-text-capitalize ion-text-right">{{item.prox_pago | date: "dd-MM-yyyy"}}</p>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<p *ngIf="showEmpty2" class="text-empty">No tienes pagos realizados</p>
+		</ion-list>
+		<ion-list *ngIf="!pagado">
+			<div style="background-color:#FFFFFF;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#F2F2F2;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#FFFFFF;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+			<div style="background-color:#F2F2F2;padding-top: 10px;">
+				<ion-grid class="ion-no-padding">
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="7">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="5" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 70%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			      <ion-row class="ion-no-padding">
+			        <ion-col size="6">
+			          <p class="title-item"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item"><ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text></p>
+			        </ion-col>
+			        <ion-col size="6" style="display: flex;align-items: flex-end;flex-direction: column;">
+			          <p class="title-item ion-text-right"><ion-skeleton-text animated style="width: 65px;"></ion-skeleton-text></p>
+			          <p class="info-item ion-text-capitalize ion-text-right" style="margin: 0px; width: 60%;"><ion-skeleton-text animated></ion-skeleton-text>
+			        </ion-col>
+			      </ion-row>
+			    </ion-grid>
+			    <hr>
+			</div>
+		</ion-list>
+	</div>
+</ion-content>
+
+<script>
+
+</script>

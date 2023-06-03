@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Detalle
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-fab vertical="top" horizontal="end" slot="fixed" (click)="GoMap()" *ngIf="data.estado == 3" class="btn-help">
+		Ir a ubicación
+	</ion-fab>
+	<div class="content-profile">
+		<img src="{{user.imagen}}">
+		<div class="content-info">
+			<p class="title">{{user.nombre}}</p>
+			<p class="order">Solicitud #{{data.id}}</p>
+			<p class="address" *ngIf="service.producto_id != '1'"><ion-icon name="arrow-dropup" class="custom1-map"></ion-icon> {{user.direccion}}</p>
+		</div>
+	</div>
+	<div class="content-infoP">
+		<p><span>Para:</span> Mi</p>
+		<p *ngIf="service.producto_id != '1'"><span>Categoría:</span> {{service.categoria}}</p>
+		<p *ngIf="service.producto_id != '1'"><span>Servicio:</span> {{service.nombre}}</p>
+		<p><span>Fecha:</span> {{data.tiempo}} | {{data.hora}}</p>
+		<p><span>Lugar:</span> {{user.direccion}}</p>
+		<p><span>Observaciones:</span> {{service.referencia}}</p>
+		<p *ngIf="data.estado == 3"><span>Estado:</span> En proceso</p>
+		<p *ngIf="data.estado == 4"><span>Estado:</span> Finalizada</p>
+		<p *ngIf="data.estado == 3"><span>Teléfono:</span> {{user.telefono}} 
+			<ion-icon name="call" class="icon-callP" (click)="presentConfirm1(user.telefono)"></ion-icon> 
+			<ion-icon name="logo-whatsapp" class="icon-callP icon-callP1" (click)="whatsapp()"></ion-icon>
+
+		</p>
+		<br>
+		<p *ngIf="data.estado == 3" (click)="chatPedidos(data.id)"><span>Ir al chat con {{user.nombre}}  </span><ion-icon name="chatbubbles-sharp" class="icon-callP icon-callP2"></ion-icon></p>
+
+		<div *ngIf="data.estado == 4">
+			<div *ngIf="service.puntaje1 != 0">
+				<p class="title-cal">¡Ya Calificaste!</p>
+				<div class="content-start">
+					<ion-icon name="star" *ngFor="let current of [1, 2, 3, 4, 5]; let i = index" class="icon-star" [ngClass]="{'filled': i < service.puntaje1}"></ion-icon>
+				</div>
+				<p class="comment-cal">{{service.comentario1}}</p>	
+	    	</div>
+	    	<hr style="background-color: #ccc;" *ngIf="service.puntaje1 != 0 && service.puntaje2 != 0">
+	    	<div *ngIf="service.puntaje2 != 0">
+				<p class="title-cal">¡Te Calificaron!</p>
+				<div class="content-start">
+					<ion-icon name="star" *ngFor="let current of [1, 2, 3, 4, 5]; let i = index" class="icon-star" [ngClass]="{'filled': i < service.puntaje2}"></ion-icon>
+				</div>
+				<p class="comment-cal">{{service.comentario2}}</p>	
+	    	</div>
+		</div>
+ 
+		<div *ngIf="data.estado == 5">
+			<p class="title-cal">Motivo de Cancelación: <br>{{data.comentario}}</p>
+		</div>
+	</div>
+	<ion-button expand="block" fill="outline" class="ion-text-capitalize btn-init2" (click)="encamino()" *ngIf="data.estado == 3 && encaminov == 0">
+		<ion-icon name="car" style="margin-right: 10px"></ion-icon>
+		<p>En Camino</p>
+	</ion-button>
+	<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="presentConfirm()" *ngIf="data.estado == 3">Finalizar Solicitud</ion-button>
+	<ion-button expand="block" class="ion-text-capitalize btn-init btn-init1" (click)="presentModal1()" *ngIf="data.estado == 3">Cancelar Solicitud</ion-button>
+	<div *ngIf="data.estado == 4">
+		<ion-button expand="block" fill="outline" class="ion-text-capitalize btn-init2" *ngIf="service.puntaje1 == 0" (click)="presentModal()">
+		<ion-icon slot="start" name="star" class="icon-cal"></ion-icon>
+		<p>Calificar Solicitud</p>
+		</ion-button>
+	</div>
+	<br>
+</ion-content>

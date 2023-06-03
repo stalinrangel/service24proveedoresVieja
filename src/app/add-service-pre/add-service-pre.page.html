@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" icon="md-arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Nuevo Servicio
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-slides [options]="slideOpts">
+	    <ion-slide>
+	    	<div class="content-profile">
+				<div class="content-img" (click)="presentActionSheet('1')">
+					<img src="{{image_user}}">
+					<ion-icon md="ios-camera" ios="ios-camera"></ion-icon>
+				</div>	
+			</div>
+			<form [formGroup]="registerServiceForm" class="content-div">
+				<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.categoriaP_id}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.categoriaP_id != ''">Seleccione un área</ion-label>
+					<ion-select formControlName="categoriaP_id" class="select-input" cancelText="Cancelar" [interfaceOptions]="customActionSheetOptions1" interface="action-sheet" mode="md">
+					  <ion-select-option [value]="item.id" *ngFor="let item of categories_principal">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.categoria_id}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.categoria_id != ''">Seleccione una categoría</ion-label>
+					<ion-select formControlName="categoria_id" class="select-input" cancelText="Cancelar" [interfaceOptions]="customActionSheetOptions1" interface="action-sheet" mode="md">
+					  <ion-select-option [value]="item.id" *ngFor="let item of categories">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.subcategoria_id}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.subcategoria_id != ''">Seleccione una sub categoría</ion-label>
+					<ion-select formControlName="subcategoria_id" class="select-input" cancelText="Cancelar" [interfaceOptions]="customActionSheetOptions2" interface="action-sheet" mode="md">
+					  <ion-select-option [value]="item.id" *ngFor="let item of subcategories">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.nombre}">
+					<ion-input type="text" formControlName="nombre" placeholder="Nombre del servicio" class="input-info"></ion-input>
+				</ion-item>
+				<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.descripcion}">
+					<ion-textarea placeholder="Descripción del servicio" formControlName="descripcion" class="area-info" rows="4" cols="20" class="area-info"></ion-textarea>
+				</ion-item>
+
+				<ion-item lines="none" class="item-info2" [ngClass]="{'danger': formErrors.anos_experiencia}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.anos_experiencia != ''">
+						<span>Años de experiencia</span>
+					</ion-label>
+					<ion-select formControlName="anos_experiencia" mode="md" class="select-input" cancelText="Cancelar" mode="md">
+					  <ion-select-option [value]="item" *ngFor="let item of years">{{item}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+
+				<ion-list-header no-padding>
+			      	<ion-label class="text-slide" style="margin: 5% 0% 3%;text-align: left;">
+			      		<span>Seleccione las zonas en la que quiere ofrecer su servicio</span>
+			  		</ion-label>
+			    </ion-list-header>
+			    <ion-item lines="none" class="item-info2" [ngClass]="{'danger': formErrors.zona}" [ngStyle]="zones.length == 0 && {'margin-bottom': '20px'}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.ciudad != ''">Seleccione una ciudad</ion-label>
+					<ion-select formControlName="ciudad" mode="md" class="select-input" cancelText="Cancelar" interface="action-sheet">
+					  <ion-select-option [value]="item" *ngFor="let item of cities">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<ion-item lines="none" class="item-info2" [ngClass]="{'danger': formErrors.zona}" [ngStyle]="zones.length == 0 && {'margin-bottom': '20px'}">
+					<ion-label slot="start" class="label-select" [hidden]="registerServiceForm.value.zona != ''">Seleccione una zona</ion-label>
+					<ion-select formControlName="zona" mode="md" class="select-input" cancelText="Cancelar" interface="action-sheet" multiple="true">
+					  <ion-select-option [value]="item" *ngFor="let item of zones">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<div class="content-chip" *ngIf="selecZones.length > 0">
+					<div class="chip-item" *ngFor="let item of selecZones">
+						<p>{{item.nombre}}</p>
+						<ion-icon name="close" (click)="deleteLanguage(item)"></ion-icon>
+					</div>
+				</div>
+
+				<ion-radio-group formControlName="idoneidad">
+				    <ion-list-header no-padding class="header-radio">
+				      	<ion-label class="text-slide" style="margin: 5% 0% 0%;">
+				      		<span>Idoneidad</span>
+				  		</ion-label>
+				    </ion-list-header>
+				    <ion-grid no-padding>
+					  <ion-row no-padding>
+					    <ion-col no-padding>
+						    <ion-item lines="none">
+						      <ion-label class="label-radio">Sí</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="Si"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					    <ion-col no-padding>
+					    	<ion-item lines="none">
+						      <ion-label class="label-radio">No</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="No"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					    <ion-col no-padding>
+					    	<ion-item lines="none">
+						      <ion-label class="label-radio">No Aplica</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="No Aplica"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					  </ion-row>
+					</ion-grid>
+				</ion-radio-group>
+				<br>
+				
+				<ion-button expand="block" color="secondary" class="ion-text-capitalize btn-init btn-register" (click)="next()">
+				Siguiente</ion-button>
+			</form>
+	    </ion-slide>
+	    <ion-slide style="padding: 20px">
+	    	<ion-list-header no-padding class="header-radio">
+		      	<ion-label class="text-slide">
+		      		<span>Agrega hasta un máximo de 10 imagenes de tu servicio, el cual podrá ser visto por tus próximos clientes.</span>
+		  		</ion-label>
+		    </ion-list-header>
+			<ion-grid class="grid-item">
+			  <ion-row>
+			    <ion-col size="6" class="col-item" *ngFor="let img of images_upload">
+			        <div class="content-img" #square [ngStyle]="{'height.px': square.offsetWidth - (square.offsetWidth*0.15)}">
+			          <ion-icon name="close-circle" class="icon-delete" (click)="presentConfirmDelete(img)"></ion-icon>
+			          <img src="{{img.url}}" (click)="presentConfirmDelete(img)">
+			        </div>
+			    </ion-col>
+			    <ion-col size="6" class="col-item" *ngIf="images_upload.length < 10">
+			        <div class="content-img" #square [ngStyle]="{'height.px': square.offsetWidth - (square.offsetWidth*0.15)}">
+			          <img src="assets/imagen-servicio.png" (click)="presentActionSheet('2')">
+			        </div>
+			    </ion-col>
+			  </ion-row>
+			</ion-grid>
+			<br>		
+			<ion-button expand="block" color="secondary" style="width: 100%" class="ion-text-capitalize btn-init btn-register" (click)="register()">
+				Agregar servicio</ion-button>
+	    </ion-slide>
+	</ion-slides>
+</ion-content>

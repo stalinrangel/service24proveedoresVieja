@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Editar Perfil
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify" (click)="editProfile()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="checkmark-sharp" class="icon-check"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="content-profile">
+		<div class="content-img" (click)="presentActionSheet()">
+			<img src="{{image_user}}">
+			<ion-icon name="camera"></ion-icon>
+		</div>	
+		<div class="content-info">
+			<p>{{usuario.nombre}}</p>
+			<div class="start-user">
+	    		<rating [(ngModel)]="usuario.promedio_calificacion"
+	    				class="rating"
+				        readonly="true"
+				        size="small">
+				</rating>
+	    	</div>
+		</div>
+	</div>
+	<form [formGroup]="userForm" class="content-div">
+		<ion-item lines="none" class="item-info">
+			<ion-input type="text" formControlName="nombre" class="input-info"></ion-input>
+		</ion-item>
+		<ion-item lines="none" class="item-info">
+			<ion-input type="email" formControlName="email" disabled class="input-info"></ion-input>
+		</ion-item>
+	</form>
+</ion-content>

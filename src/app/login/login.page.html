@@ -1,0 +1,27 @@
+<ion-content>
+	<div class="content-img">
+		<img src="assets/logo_blanco.svg">
+		<h2>Iniciar Sesión</h2>
+	</div>
+	<form [formGroup]="loginUserForm" class="padding-space">
+		<ion-item lines="none" class="item-input">
+			<ion-input type="email" formControlName="email" placeholder="Correo electrónico"></ion-input>
+		</ion-item>
+		<ion-item lines="none" class="item-input">
+			<ion-input type="password" formControlName="password" placeholder="Contraseña" (keyup.enter)="login()"></ion-input>
+		</ion-item>
+		<p (click)="resetPassword()">¿Olvidó su Constraseña?</p>
+		<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="login()">Iniciar Sesión</ion-button>
+		<div class="or-spacer">
+			<div class="mask"></div>
+			<span>ó</span>
+			<div class="mask"></div>
+		</div>
+		<!--ion-button expand="block" class="ion-text-capitalize btn-init btn-facebook" (click)="loginFacebook()">
+		<ion-icon class="custom-facebook" name="arrow-dropup" slot="start"></ion-icon>
+		Iniciar Sesión con Facebook</ion-button-->
+		<ion-button expand="block" class="btn-init btn-google" (click)="loginApple()" style="margin-bottom: 10px;color: #000;text-transform: initial;" *ngIf="btnApple"><ion-icon class="icon-apple" name="arrow-dropup" slot="start"></ion-icon> Iniciar sesión con Apple</ion-button>
+		<ion-button expand="block" class="btn-init btn-google" (click)="doGoogleLogin()" style="color: #000;text-transform: initial;"><ion-icon class="icon-google" name="arrow-dropup" slot="start"></ion-icon> Iniciar sesión con Google</ion-button>
+		<p class="ion-text-center" (click)="register()">Registrarse</p>
+	</form>
+</ion-content>

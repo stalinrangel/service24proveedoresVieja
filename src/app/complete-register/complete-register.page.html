@@ -1,0 +1,647 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Completar Perfil
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-slides [options]="slideOpts" class="text-slide" #slides>
+	    <ion-slide>
+	      	<p class="title-text">Rellena el siguiente formulario con tu información de contacto <span>1/4</span></p>
+	      	<ion-radio-group class="radio-group" [(ngModel)]="typeUser" (ionChange)="changeType()">
+			    <ion-list-header>
+			      <ion-label class="text-slide">Tipo de Proveedor:</ion-label>
+			    </ion-list-header>
+			    <ion-grid class="ion-no-padding">
+				  <ion-row class="ion-no-padding">
+				    <ion-col class="ion-no-padding">
+					    <ion-item lines="none">
+					      <ion-label class="label-radio">Persona Independiente</ion-label>
+					      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="1"></ion-radio>
+					    </ion-item>
+				    </ion-col>
+				    <ion-col class="ion-no-padding">
+				    	<ion-item lines="none">
+					      <ion-label class="label-radio">Empresa</ion-label>
+					      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="2"></ion-radio>
+					    </ion-item>
+				    </ion-col>
+				  </ion-row>
+				</ion-grid>
+	  		</ion-radio-group>
+		    <form [formGroup]="data1ProfileForm" class="padding-space2" [hidden]="typeUser == '2'">
+		    	<p class="text-slide">Datos Personales:</p>
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Nompre Completo:</ion-label>
+					<ion-input type="text" formControlName="nombre" placeholder="Nombre Completo" class="item-info3 ion-text-capitalize" (ionBlur)="changeItem(1)" [ngClass]="{'danger': formErrors.nombre}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Cédula o Pasaporte:</ion-label>
+					<ion-input type="text" formControlName="cedula" placeholder="Cédula o Pasaporte" class="item-info3" (ionBlur)="changeItem(2)" [ngClass]="{'danger': formErrors.cedula}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Sexo:</ion-label>
+					<ion-select formControlName="sexo" mode="md" cancelText="Cancelar" class="select-input" (ionBlur)="changeItem(3)" [ngClass]="{'danger': formErrors.sexo}">
+					  	<ion-select-option value="Masculino">Masculino</ion-select-option>
+	      				<ion-select-option value="Femenino">Femenino</ion-select-option>
+					</ion-select>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Nacionalidad:</ion-label>
+					<ion-input type="text" formControlName="nacionalidad" placeholder="Nacionalidad" class="item-info3 ion-text-capitalize" (ionBlur)="changeItem(4)" [ngClass]="{'danger': formErrors.nacionalidad}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Dirección:</ion-label>
+					<ion-textarea placeholder="Dirección" formControlName="direccion" class="area-info" rows="3" cols="20" class="area-info" (ionBlur)="changeItem(5)" [ngClass]="{'danger': formErrors.direccion}"></ion-textarea>
+					<!--ion-icon slot="end" name="arrow-dropup" class="custom-map"></ion-icon-->
+				</ion-item>
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Dirección Exacta:</ion-label>
+					<ion-textarea placeholder="Dirección Exacta" formControlName="direccion_exacta" class="area-info" rows="3" cols="20" class="area-info ion-text-capitalize" (ionBlur)="changeItem(52)" [ngClass]="{'danger': formErrors.direccion_exacta}"></ion-textarea>
+				</ion-item>
+
+				<div class="content-map">
+					<ion-icon name="locate" class="icon-location" (click)="tryGeolocation()"></ion-icon>
+					<div #map id="map"></div>
+				</div>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Fecha de Nacimiento</ion-label>
+					<div style="display: flex;align-items: center;margin-bottom: 10px;">
+						<ion-input type="number" formControlName="dn" placeholder="DD" class="input-info input-dateI" [ngClass]="{'danger': formErrors.dn}"></ion-input><span class="sep-date" (ionBlur)="changeItem(6)">/</span>
+					  	<ion-input type="number" formControlName="mn" placeholder="MM" class="input-info input-dateI" [ngClass]="{'danger': formErrors.mn}"></ion-input><span class="sep-date" (ionBlur)="changeItem(6)">/</span>
+					  	<ion-input type="number" formControlName="yn" placeholder="AAAA" class="input-info input-dateI" [ngClass]="{'danger': formErrors.yn}" (ionBlur)="changeItem(6)"></ion-input>
+					</div>  	
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Número de Teléfono</ion-label>
+					<ion-input type="tel" formControlName="telefono" placeholder="Número de Teléfono" class="item-info3" (ionBlur)="changeItem(7)" [ngClass]="{'danger': formErrors.telefono}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Correo Electrónico</ion-label>
+					<ion-input type="email" formControlName="email" placeholder="Correo Electrónico" class="item-info3" (ionBlur)="changeItem(8)" [ngClass]="{'danger': formErrors.email}"></ion-input>
+				</ion-item>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" style="margin-top: 15px;" (click)="next1()">
+				Siguiente</ion-button>
+			</form>
+			<form [formGroup]="data1CompanyForm" class="padding-space2" [hidden]="typeUser == '1'">
+		    	<p class="text-slide">Datos de la Empresa:</p>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Nombre de Empresa</ion-label>
+					<ion-input type="text" formControlName="nombre" placeholder="Nombre de Empresa" class="item-info3 ion-text-capitalize" (ionBlur)="changeItem(9)" [ngClass]="{'danger': formErrors.nombre}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked" *ngIf="formLocal.pais_id == '2'">RUC</ion-label>
+					<ion-label class="text-label" position="stacked" *ngIf="formLocal.pais_id != '2'">RUT</ion-label>
+					<ion-input type="text" formControlName="ruc" *ngIf="formLocal.pais_id == '2'" placeholder="RUC" class="item-info3" (ionBlur)="changeItem(10)" [ngClass]="{'danger': formErrors.ruc}"></ion-input>
+					<ion-input type="text" formControlName="ruc" *ngIf="formLocal.pais_id != '2'" placeholder="RUT" class="item-info3" (ionBlur)="changeItem(10)" [ngClass]="{'danger': formErrors.ruc}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Dirección</ion-label>
+					<ion-textarea placeholder="Dirección" formControlName="direccion" class="area-info" rows="3" cols="20" class="area-info" (ionBlur)="changeItem(11)" [ngClass]="{'danger': formErrors.direccion}"></ion-textarea>
+					<!--ion-icon slot="end" name="arrow-dropup" class="custom-map"></ion-icon-->
+				</ion-item>
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Dirección Exacta</ion-label>
+					<ion-textarea placeholder="Dirección Exacta" formControlName="direccion_exacta" class="area-info ion-text-capitalize" rows="3" cols="20" class="area-info" (ionBlur)="changeItem(53)" [ngClass]="{'danger': formErrors.direccion_exacta}"></ion-textarea>
+				</ion-item>
+
+				<div class="content-map">
+					<ion-icon name="locate" class="icon-location" (click)="tryGeolocation()"></ion-icon>
+					<div #map1 id="map1"></div>
+				</div>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Número de Teléfono</ion-label>
+					<ion-input type="tel" formControlName="telefono" placeholder="Número de Teléfono" class="item-info3" (ionBlur)="changeItem(12)" [ngClass]="{'danger': formErrors.telefono}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Correo Electrónico</ion-label>
+					<ion-input type="email" formControlName="email" placeholder="Correo Electrónico" class="item-info3" (ionBlur)="changeItem(13)" [ngClass]="{'danger': formErrors.email}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Nombre Representante Legal</ion-label>
+					<ion-input type="text" formControlName="contacto_nombre" placeholder="Nombre de Representante Legal" class="item-info3 ion-text-capitalize" (ionBlur)="changeItem(14)" [ngClass]="{'danger': formErrors.contacto_nombre}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Cédula o Pasaporte</ion-label>
+					<ion-input type="text" formControlName="contacto_cedula" placeholder="Cédula o Pasaporte de Representante legal" class="item-info3" (ionBlur)="changeItem(15)" [ngClass]="{'danger': formErrors.contacto_cedula}"></ion-input>
+				</ion-item>
+
+				<ion-item lines="none" class="item1">
+					<ion-label class="text-label" position="stacked">Cargo</ion-label>
+					<ion-input type="text" formControlName="contacto_cargo" placeholder="Cargo" class="item-info3 ion-text-capitalize" (ionBlur)="changeItem(16)" [ngClass]="{'danger': formErrors.contacto_cargo}"></ion-input>
+				</ion-item>
+
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="next1()" style="margin-top: 15px;">
+				Siguiente</ion-button>
+			</form>
+	    </ion-slide>
+		<ion-slide>
+			<p class="title-text">Indícanos tu horario disponible e idiomas en el que podrás ofrecer tus servicios. <span>2/4</span></p>
+			<form [formGroup]="data2ProfileForm" class="padding-space2">
+				<p class="text-slide" [hidden]="typeUser == '2'">Formación:</p>
+
+				<ion-item lines="none" class="item1" [ngClass]="{'danger': formErrors.formacion}" [hidden]="typeUser == '2'">
+					<ion-label slot="start" class="label-select" [hidden]="data2ProfileForm.value.formacion != ''">
+						<span>Formación</span>
+					</ion-label>
+					<ion-select formControlName="formacion" mode="md" class="select-input" cancelText="Cancelar" (ionBlur)="changeItem(18)">
+					  <ion-select-option [value]="item.nombre" *ngFor="let item of preparate">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+
+			<p class="text-slide">Disponibilidad:</p>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.lunes}" (click)="changeDay('lunes')">Lunes</ion-label>
+					<div style="flex: 1; text-align: center;">
+						<p class="text-g" style="margin-bottom: 10px;">Horario:</p>
+						<div class="content-fhour">					
+							<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="lunesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.lunes" minuteValues="0,15,30,45" (ionChange)="changeItem(21)"></ion-datetime>
+							<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="lunesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.lunes" minuteValues="0,15,30,45" (ionChange)="changeItem(21)"></ion-datetime>
+							<span class="text-g"> a </span>
+							<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="lunesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.lunes" minuteValues="0,15,30,45" (ionChange)="changeItem(21)"></ion-datetime>
+							<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="lunesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.lunes" minuteValues="0,15,30,45" (ionChange)="changeItem(21)"></ion-datetime>
+						</div>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.martes}" (click)="changeDay('martes')">Martes</ion-label>
+					<div class="align-hour">
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="martesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.martes" minuteValues="0,15,30,45" (ionChange)="changeItem(22)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="martesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.martes" minuteValues="0,15,30,45" (ionChange)="changeItem(22)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="martesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.martes" minuteValues="0,15,30,45" (ionChange)="changeItem(22)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="martesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.martes" minuteValues="0,15,30,45" (ionChange)="changeItem(22)"></ion-datetime>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.miercoles}" (click)="changeDay('miercoles')">Miércoles</ion-label>
+					<div class="align-hour">
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="miercolesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.miercoles" minuteValues="0,15,30,45" (ionChange)="changeItem(23)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="miercolesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.miercoles" minuteValues="0,15,30,45" (ionChange)="changeItem(23)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="miercolesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.miercoles" minuteValues="0,15,30,45" (ionChange)="changeItem(23)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="miercolesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.miercoles" minuteValues="0,15,30,45" (ionChange)="changeItem(23)"></ion-datetime>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.jueves}" (click)="changeDay('jueves')">Jueves</ion-label>
+					<div class="align-hour">
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="juevesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.jueves" minuteValues="0,15,30,45" (ionChange)="changeItem(24)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="juevesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.jueves" minuteValues="0,15,30,45" (ionChange)="changeItem(24)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="juevesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.jueves" minuteValues="0,15,30,45" (ionChange)="changeItem(24)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="juevesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.jueves" minuteValues="0,15,30,45" (ionChange)="changeItem(24)"></ion-datetime>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.viernes}" (click)="changeDay('viernes')">Viernes</ion-label>
+					<div class="align-hour">
+				    <ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="viernesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.viernes" minuteValues="0,15,30,45" (ionChange)="changeItem(25)"></ion-datetime>
+				    <ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="viernesi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.viernes" minuteValues="0,15,30,45" (ionChange)="changeItem(25)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="viernesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.viernes" minuteValues="0,15,30,45" (ionChange)="changeItem(25)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="viernesf" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.viernes" minuteValues="0,15,30,45" (ionChange)="changeItem(25)"></ion-datetime>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.sabado}" (click)="changeDay('sabado')">Sábado</ion-label>
+					<div class="align-hour">
+				    <ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="sabadoi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.sabado" minuteValues="0,15,30,45" (ionChange)="changeItem(26)"></ion-datetime>
+				    <ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="sabadoi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.sabado" minuteValues="0,15,30,45" (ionChange)="changeItem(26)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="sabadof" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.sabado" minuteValues="0,15,30,45" (ionChange)="changeItem(26)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="sabadof" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.sabado" minuteValues="0,15,30,45" (ionChange)="changeItem(26)"></ion-datetime>
+					</div>
+				</ion-item>
+				<ion-item class="item-days">
+					<ion-label class="day-active" [ngClass]="{'day-inactive': data2ProfileForm.value.domingo}" (click)="changeDay('domingo')">Domingo</ion-label>
+					<div class="align-hour">
+				    <ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="domingoi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.domingo" minuteValues="0,15,30,45" (ionChange)="changeItem(27)"></ion-datetime>
+				    <ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="domingoi" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.domingo" minuteValues="0,15,30,45" (ionChange)="changeItem(27)"></ion-datetime>
+					<span class="text-g"> a </span>
+					<ion-datetime *ngIf="formLocal.pais_id == '2'" display-format="hh:mmA" mode="ios" picker-format="hh mm A" formControlName="domingof" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.domingo" minuteValues="0,15,30,45" (ionChange)="changeItem(27)"></ion-datetime>
+					<ion-datetime *ngIf="formLocal.pais_id != '2'" display-format="HH:mm" mode="ios" picker-format="HH mm" formControlName="domingof" class="area-info" cancelText="Cancelar" doneText="Aceptar" [disabled]="data2ProfileForm.value.domingo" minuteValues="0,15,30,45" (ionChange)="changeItem(27)"></ion-datetime>
+					</div>
+				</ion-item>
+					<p class="text-slide">Idiomas:</p>
+					<ion-item lines="none" class="item1" [ngClass]="{'danger': formErrors.idioma}" [ngStyle]="idiomas.length == 0 && {'margin-bottom': '20px'}">
+					<ion-label slot="start" class="label-select" [hidden]="data2ProfileForm.value.idioma != ''">Agregar idioma</ion-label>
+					<ion-select formControlName="idioma" mode="md" class="select-input" cancelText="Cancelar" multiple="true" (ionBlur)="changeItem(28)">
+					  <ion-select-option [value]="item" *ngFor="let item of languages">{{item.nombre}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+				<div class="content-chip" *ngIf="idiomas.length > 0">
+					<div class="chip-item" *ngFor="let item of idiomas">
+						<p>{{item.nombre}}</p>
+						<ion-icon name="close" (click)="deleteLanguage(item)"></ion-icon>
+					</div>
+				</div>
+				<ion-radio-group formControlName="urgencias" (ionBlur)="changeItem(29)">
+				    <ion-list-header class="ion-no-padding header-radio">
+				      <ion-label class="text-slide">Disponibilidad para atender urgencias?</ion-label>
+				    </ion-list-header>
+				    <ion-grid class="ion-no-padding">
+					  <ion-row class="ion-no-padding">
+					    <ion-col size="4" class="ion-no-padding">
+						    <ion-item lines="none">
+						      <ion-label class="label-radio">Sí</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="Si"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					    <ion-col size="4" class="ion-no-padding">
+					    	<ion-item lines="none">
+						      <ion-label class="label-radio">No</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="No"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					  </ion-row>
+					</ion-grid>
+					</ion-radio-group>
+					<ion-radio-group formControlName="factura" (ionBlur)="changeItem(30)">
+				    <ion-list-header class="ion-no-padding header-radio">
+				      <ion-label class="text-slide">Puede dar al cliente facturas por los servicios?</ion-label>
+				    </ion-list-header>
+				    <ion-grid class="ion-no-padding">
+					  <ion-row class="ion-no-padding">
+					    <ion-col size="4" class="ion-no-padding">
+						    <ion-item lines="none">
+						      <ion-label class="label-radio">Sí</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="Si"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					    <ion-col size="4" class="ion-no-padding">
+					    	<ion-item lines="none">
+						      <ion-label class="label-radio">No</ion-label>
+						      <ion-radio slot="end" color="tertiary" mode="md" class="icon-radio" value="No"></ion-radio>
+						    </ion-item>
+					    </ion-col>
+					  </ion-row>
+					</ion-grid>
+					</ion-radio-group>
+					<br>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back()">Atras</ion-button>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="next2()">
+				Siguiente</ion-button>
+			</form>
+		</ion-slide>
+		<!--ion-slide [hidden]="typeUser == '2'">
+			<p class="title-text">Rellene el siguiente formulario para completar su pre-registro.</p>
+			<form [formGroup]="referencePForm" class="padding-space2">
+			<p class="text-slide">Referencias Personales:</p>
+			<p class="text-infoS">Indique los datos de dos personas que puedan referenciarlo y no vivan con usted.</p>
+			<p class="text-slide">Referencia 1:</p>
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.nombre1}">
+				<ion-input type="text" formControlName="nombre1" placeholder="Nombre Completo" class="input-info ion-text-capitalize" (ionBlur)="changeItem(31)"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.telefono1}">
+				<ion-input type="tel" formControlName="telefono1" placeholder="Teléfono" class="input-info" (ionBlur)="changeItem(32)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.direccion1}">
+				<ion-input type="text" formControlName="direccion1" placeholder="Dirección" class="input-info ion-text-capitalize" (ionBlur)="changeItem(33)"></ion-input>
+			</ion-item>
+
+			<p class="text-slide">Referencia 2 (Opcional):</p>
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.nombre2}">
+				<ion-input type="text" formControlName="nombre2" placeholder="Nombre Completo" class="input-info ion-text-capitalize" (ionBlur)="changeItem(34)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.telefono2}">
+				<ion-input type="tel" formControlName="telefono2" placeholder="Teléfono" class="input-info" (ionBlur)="changeItem(35)"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors.direccion2}">
+				<ion-input type="text" formControlName="direccion2" placeholder="Dirección" class="input-info ion-text-capitalize" (ionBlur)="changeItem(36)"></ion-input>
+			</ion-item>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back()">
+			Atras</ion-button>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="next3()">
+			Siguiente</ion-button>
+			</form>
+		</ion-slide>
+		<ion-slide>
+			<p class="title-text">Rellene el siguiente formulario para completar su pre-registro.</p>
+			<form [formGroup]="referenceCForm" class="padding-space2">
+			<p class="text-slide">Referencias Comerciales:</p>
+			<p class="text-infoS">Indique los datos de tres empresas con las que tenga relación comercial.</p>
+			<p class="text-slide">Referencia 1:</p>
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.nombre1}">
+				<ion-input type="text" formControlName="nombre1" placeholder="Nombre" class="input-info ion-text-capitalize" (ionBlur)="changeItem(37)"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.telefono1}">
+				<ion-input type="tel" formControlName="telefono1" placeholder="Teléfono" class="input-info" (ionBlur)="changeItem(38)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.direccion1}">
+				<ion-input type="text" formControlName="direccion1" placeholder="Dirección" class="input-info ion-text-capitalize" (ionBlur)="changeItem(39)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.contacto1}">
+				<ion-input type="text" formControlName="contacto1" placeholder="Persona de Contacto" class="input-info ion-text-capitalize" (ionBlur)="changeItem(40)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.cargo1}">
+				<ion-input type="text" formControlName="cargo1" placeholder="Cargo" class="input-info ion-text-capitalize" (ionBlur)="changeItem(41)"></ion-input>
+			</ion-item>
+
+			<p class="text-slide" *ngIf="typeUser == '1'">Referencia 2 (Opcional):</p>
+			<p class="text-slide" *ngIf="typeUser == '2'">Referencia 2:</p>
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.nombre2}">
+				<ion-input type="text" formControlName="nombre2" placeholder="Nombre" class="input-info ion-text-capitalize" (ionBlur)="changeItem(42)"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.telefono2}">
+				<ion-input type="tel" formControlName="telefono2" placeholder="Teléfono" class="input-info ion-text-capitalize" (ionBlur)="changeItem(43)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.direccion2}">
+				<ion-input type="text" formControlName="direccion2" placeholder="Dirección" class="input-info ion-text-capitalize" (ionBlur)="changeItem(44)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.contacto2}">
+				<ion-input type="text" formControlName="contacto2" placeholder="Persona de Contacto" class="input-info ion-text-capitalize" (ionBlur)="changeItem(45)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.cargo2}">
+				<ion-input type="text" formControlName="cargo2" placeholder="Cargo" class="input-info ion-text-capitalize" (ionBlur)="changeItem(46)"></ion-input>
+			</ion-item>
+
+			<p class="text-slide">Referencia 3 (Opcional):</p>
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.nombre3}">
+				<ion-input type="text" formControlName="nombre3" placeholder="Nombre" class="input-info ion-text-capitalize" (ionBlur)="changeItem(47)"></ion-input>
+			</ion-item>
+			
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.telefono3}">
+				<ion-input type="tel" formControlName="telefono3" placeholder="Teléfono" class="input-info" (ionBlur)="changeItem(48)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.direccion3}">
+				<ion-input type="text" formControlName="direccion3" placeholder="Dirección" class="input-info ion-text-capitalize" (ionBlur)="changeItem(49)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.contacto3}">
+				<ion-input type="text" formControlName="contacto3" placeholder="Persona de Contacto" class="input-info ion-text-capitalize" (ionBlur)="changeItem(50)"></ion-input>
+			</ion-item>
+
+			<ion-item lines="none" class="item-info" [ngClass]="{'danger': formErrors4.cargo3}">
+				<ion-input type="text" formControlName="cargo3" placeholder="Cargo" class="input-info ion-text-capitalize" (ionBlur)="changeItem(51)"></ion-input>
+			</ion-item>
+
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back()">
+			Atras</ion-button>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="next4()">
+			Siguiente</ion-button>
+			</form>
+		</ion-slide-->
+		<ion-slide>
+			<p class="title-text">Necesitamos información de tu identidad, para ello es necesario que cargues los siguientes documentos <span>3/4</span></p>
+			<div style="width: 100%;">
+
+			<ion-card class="card-document" (click)="presentActionSheet(1)">
+				<p class="text-slide" *ngIf="typeUser == '1'" [ngClass]="{'text_red': up_fotoP}"> Foto Frontal para tu Perfil</p>
+					<p class="text-slide" *ngIf="typeUser == '2'" [ngClass]="{'text_red': up_logo}">Logo de Empresa</p>
+				<div>
+					<ion-icon name="person" class="icon-img" *ngIf="progressText1 != 100 && typeUser == '1'"></ion-icon>
+					<ion-icon name="image" class="icon-img" *ngIf="progressText1 != 100 && typeUser == '2'"></ion-icon>
+					<div *ngIf="progressText1 == 100">
+						<img src="{{formLocal.foto}}" class="img-card" *ngIf="typeUser == '1'">
+						<img src="{{formLocal.logo}}" class="img-card" *ngIf="typeUser == '2'">
+					</div>
+				</div>
+				<ion-item lines="none" class="item-charge">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText1 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText1 > 0 && progressText1 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText1 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText1 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText1 > 0 && progressText1 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText1 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText1 > 0">{{progressText1}}%</p>
+						<ion-progress-bar [value]="progress1" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card class="card-document" (click)="presentActionSheet(2)">
+				<p class="text-slide" *ngIf="typeUser == '1'" [ngClass]="{'text_red': up_cedula}">Cédula o Pasaporte</p>
+				<p class="text-slide" *ngIf="typeUser == '2' && formLocal.pais_id == '2'" [ngClass]="{'text_red': up_operaciones}">Aviso de Operaciones</p>
+				<p class="text-slide" *ngIf="typeUser == '2' && formLocal.pais_id != '2'" [ngClass]="{'text_red': up_operaciones}">Tarjeta de RUT</p>
+				<div>
+					<ion-icon name="finger-print" class="icon-img" *ngIf="progressText2 != 100 && typeUser == '1'"></ion-icon>
+					<ion-icon name="document-text-outline" class="icon-img" *ngIf="progressText2 != 100 && typeUser == '2'"></ion-icon>
+					<div *ngIf="progressText2 == 100">
+						<img src="{{formLocal.pasaporteP}}" class="img-card" *ngIf="typeUser == '1'">
+						<img src="{{formLocal.operaciones}}" class="img-card" *ngIf="typeUser == '2'">
+					</div>
+				</div>
+				<ion-item lines="none" class="item-charge">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText2 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText2 > 0 && progressText2 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText2 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText2 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText2 > 0 && progressText2 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText2 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText2 > 0">{{progressText2}}%</p>
+						<ion-progress-bar [value]="progress2" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card class="card-document" (click)="presentActionSheet(4)">
+				<p class="text-slide" *ngIf="typeUser == '2'" [ngClass]="{'text_red': up_fotoE}">Foto Frontal del Representante Legal</p>
+				<div *ngIf="typeUser == '2'">
+					<div>
+						<ion-icon name="person" class="icon-img" *ngIf="progressText4 != 100"></ion-icon>
+						<div *ngIf="progressText4 == 100">
+							<img src="{{formLocal.foto}}" class="img-card">
+						</div>
+					</div>
+				</div>
+				<ion-item lines="none" class="item-charge" *ngIf="typeUser == '2'">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText4 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText4 > 0 && progressText4 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText4 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText4 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText4 > 0 && progressText4 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText4 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText4 > 0">{{progressText4}}%</p>
+						<ion-progress-bar [value]="progress4" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card class="card-document" (click)="presentActionSheet(3)">
+				<p class="text-slide" *ngIf="typeUser == '1'">Idoneidad (Opcional)</p>
+				<p class="text-slide" *ngIf="typeUser == '2'" [ngClass]="{'text_red': up_cedulaE}">Cédula del Representante Legal</p>
+				<div>
+					<ion-icon name="checkmark" class="icon-img" *ngIf="progressText3 != 100 && typeUser == '1'"></ion-icon>
+					<ion-icon name="finger-print" class="icon-img" *ngIf="progressText3 != 100 && typeUser == '2'"></ion-icon>
+					<div *ngIf="progressText3 == 100">
+						<img src="{{formLocal.idoneidad_file}}" class="img-card" *ngIf="typeUser == '1'">
+						<img src="{{formLocal.pasaporteE}}" class="img-card" *ngIf="typeUser == '2'">
+					</div>
+				</div>
+				<ion-item lines="none" class="item-charge">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText3 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText3 > 0 && progressText3 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText3 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText3 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText3 > 0 && progressText3 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText3 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText3 > 0">{{progressText3}}%</p>
+						<ion-progress-bar [value]="progress3" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card class="card-document" *ngIf="typeUser == '1'" (click)="presentActionSheet(5)">
+				<p class="text-slide" *ngIf="typeUser == '1' && formLocal.pais_id == '2'" [ngClass]="{'text_red': up_record}">Récord Policivo</p>
+				<ion-icon name="document-text-outline" class="icon-img" *ngIf="progressText5 != 100 && typeUser == '1' && formLocal.pais_id == '2'"></ion-icon>
+				<div *ngIf="progressText5 == 100 && typeUser == '1' && formLocal.pais_id == '2'">
+					<img src="{{formLocal.record_policivo}}" class="img-card">
+				</div>
+				<ion-item lines="none" class="item-charge" *ngIf="typeUser == '1' && formLocal.pais_id == '2'">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText5 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText5 > 0 && progressText5 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText5 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText5 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText5 > 0 && progressText5 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText5 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText5 > 0">{{progressText5}}%</p>
+						<ion-progress-bar [value]="progress5" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card class="card-document" *ngIf="typeUser == '1'" (click)="presentActionSheet(6)">
+				<p class="text-slide" *ngIf="typeUser == '1' && formLocal.pais_id != '1'" [ngClass]="{'text_red': up_recibo}">Recibo de Servicio</p>
+				<p class="text-slide" *ngIf="typeUser == '1' && formLocal.pais_id == '1'" [ngClass]="{'text_red': up_recibo}">Comprobante de Domicilio</p>
+				<ion-icon name="document-text-outline" class="icon-img" *ngIf="progressText6 != 100 && typeUser == '1'"></ion-icon>
+				<div *ngIf="progressText6 == 100 && typeUser == '1'">
+					<img src="{{formLocal.recibo_servicio}}" class="img-card">
+				</div>
+				<ion-item lines="none" class="item-charge" *ngIf="typeUser == '1'">
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-upload" *ngIf="progressText6 == 0"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-cancelar" *ngIf="progressText6 > 0 && progressText6 < 100"></ion-icon>
+					<ion-icon slot="start" name="arrow-dropup" class="custom1-loaded" *ngIf="progressText6 == 100"></ion-icon>
+					<div class="content-progress">
+						<p class="text-upload" *ngIf="progressText6 == 0">Subir Archivo</p>
+						<p class="text-upload2" *ngIf="progressText6 > 0 && progressText6 < 100">Cargando Archivo</p>
+						<p class="text-upload2" *ngIf="progressText6 == 100">Archivo Cargado</p>
+						<p class="text-progress" *ngIf="progressText6 > 0">{{progressText6}}%</p>
+						<ion-progress-bar [value]="progress6" class="progress-item"></ion-progress-bar>
+					</div>
+				</ion-item>
+			</ion-card>
+			
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back()">
+			Atras</ion-button>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="presentConfirm1()">
+			Enviar</ion-button>
+			</div>
+		</ion-slide>
+		<!--ion-slide>
+			<p class="title-text">Rellene el siguiente formulario para completar su pre-registro.</p>
+
+			<form [formGroup]="data2ProfileForm" class="padding-space2">
+				<p class="text-slide" [hidden]="services.length == 0">Experiencia y Servicios:</p>
+				<ion-list class="list-services">
+					<div *ngIf="services">
+						<ion-item lines="full" *ngFor="let item of services">
+						  <ion-thumbnail slot="start" (click)="editService(item)">
+						    <img src="{{item.imagen}}">
+						  </ion-thumbnail>
+					      <ion-label (click)="editService(item)">
+					        <p>{{item.nombre}}</p>
+					        <p class="title-menu">{{item.descripcion}}</p>
+					      </ion-label>
+					      <ion-button slot="end" class="btn-deleteS" (click)="presentConfirm(item)">
+						    <ion-icon slot="icon-only" ios="md-close" md="md-close" class="icon-deleteS"></ion-icon>
+						  </ion-button>
+					    </ion-item>
+					    <p *ngIf="services.length == 0" class="text-slide1">¡Ya estas por terminar! Agrega los servicios que deseas ofrecer en nuestra plataforma.</p>
+					</div>
+				</ion-list>
+				<ion-button expand="block" class="ion-text-capitalize btn-init btn-addS" (click)="addService()">Agregar Servicio</ion-button>
+				<br>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back1()">Atras</ion-button>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="next2()">
+				Siguiente</ion-button>
+			</form>
+		</ion-slide-->
+		<ion-slide>
+			<p class="title-text">Finalmente! elige un plan de servicios con el que podrás obtener un sin fin de beneficios <span>4/4</span></p>
+
+			<div class="padding-space2">
+				<p class="text-slide">Planes de servicios:</p>
+
+				<div class="content-target">
+					<ion-card class="target-plan" *ngFor="let plan of plans" [ngClass]="{'select-target': select_plan == plan.id}">
+						<p class="item-recom" *ngIf="plan.recomendado == 1"><ion-icon name="ribbon"></ion-icon> Recomendado</p>
+						<div (click)="selectPlan(plan)">
+							<p class="name-plan">{{plan.tipo_plan}}</p>
+							<p class="price-plan" [ngClass]="{'discount': plan.descuento != 0}">${{plan.costo}}</p>
+							<p class="price-plan" *ngIf="plan.descuento != 0">${{plan.descuento}}</p>
+						</div>
+						<div class="icon-target" (click)="plan.show = !plan.show">
+							<ion-icon name="chevron-down-outline" class="icon-price" [hidden]="plan.show"></ion-icon>
+							<ion-icon name="chevron-up-outline" class="icon-price" [hidden]="!plan.show"></ion-icon>
+						</div>
+						<div [ngClass]="{'hiddenDes': !plan.show}" class="content-desplan">
+							<div class="overlay" *ngIf="!plan.show" (click)="plan.show = !plan.show"></div>
+							<div class="item-descP" *ngFor="let item of plan.descripcion" (click)="plan.show = !plan.show">
+								<ion-icon name="checkmark" class="icon-checkP"></ion-icon>
+								<p>
+									{{item.descripcion}}
+								</p>
+							</div>
+							<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" style="margin-top: 20px;width: 70%;" (click)="selectPlan(plan)">
+							Seleccionar</ion-button>
+						</div>
+					</ion-card>
+				</div>
+				<br><br>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" style="margin-right: 15px" (click)="back1()">Atras</ion-button>
+				<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="setPlan()">
+				Enviar</ion-button>
+			</div>
+		</ion-slide>
+		<!--ion-slide>
+			<ion-icon ios="ios-checkmark-circle-outline" md="ios-checkmark-circle-outline" class="custom1-confirm"></ion-icon>
+			<p class="title-page">¡Gracias por unirte a <br>Service 24!</p>
+			<br>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="goProfile()">
+			Finalizar</ion-button>
+		</ion-slide-->
+    </ion-slides>
+</ion-content>

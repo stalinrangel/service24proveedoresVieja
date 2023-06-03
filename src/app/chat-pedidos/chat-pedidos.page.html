@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="/tabs/tab3">
+	   <ion-back-button text="" name="md-arrow-back" mode="md">
+        </ion-back-button>
+	  </ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Chat pedido S00{{data.id}}
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="message-wrap">
+    <div *ngFor="let msg of msgList"
+         class="message"
+         [class.left]=" msg.emisor_id === toUser.id "
+         [class.right]=" msg.emisor_id === user.id ">
+      <img class="user-img" *ngIf="msg.emisor_id === toUser.id" [src]="msg.userAvatar" alt="" >
+      <img class="user-img" *ngIf="msg.emisor_id === user.id" [src]="msg.userAvatar" alt="" >
+      <ion-spinner name="dots" *ngIf="msg.status === 1"></ion-spinner>
+      <div class="msg-detail">
+        <div class="msg-info">
+          <p>{{msg.created_at | relativeTime}}</p>
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker ">{{msg.msg}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+  <div class="input-wrap">
+    <textarea #chat_input
+              placeholder="Escribe un mensaje"
+              [(ngModel)]="editorMsg"
+              (keyup.enter)="sendMsg()"
+              (focusin)="onFocus()">
+    </textarea>
+    <ion-button slot="icon-only" class="btn-send" (click)="sendMsg()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </div>
+</ion-footer>

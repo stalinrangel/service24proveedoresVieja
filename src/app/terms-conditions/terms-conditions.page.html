@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	  </ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Términos y Condiciones
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+	<div class="content-frame" *ngIf="contrat_url">
+		<iframe width="100%" height="100%" class="frame" [src]="contrat_url" name="iframe_a" frameborder="0" allowfullscreen></iframe>
+	</div>
+</ion-content>

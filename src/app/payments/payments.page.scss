@@ -1,0 +1,45 @@
+ion-segment-button {
+  background:  #F2F2F2;
+  max-width: initial !important;
+  font-size: 15px;
+  ion-label {
+    margin: 0;
+    text-transform: initial;
+    font-family: ('Roboto');
+    letter-spacing: normal;
+  }
+}
+.toolbar-container{
+	padding: 0px !important;
+}
+.segment-button-checked{
+    --indicator-color-checked: var(--ion-color-secondary) !important;
+    color: var(--ion-color-secondary) !important;
+}
+ion-segment{
+	background: #f4f5f8;
+}
+ion-grid{
+  color: #4d4d4d;
+}
+hr{
+  background: #ccc;
+  margin-bottom: 0px;
+}
+.title-item{
+  font-size: 12px;
+  margin:0px;
+  font-family: "Montserrat-Bold";
+}
+.info-item{
+  font-size: 13px;
+  margin: 5px 0px;
+  font-family: 'Muli';
+}
+.text-empty{
+  color: #4D4D4D;
+    text-align: center;
+    margin-top: 75px;
+    font-size: 14px;
+    font-family: "Muli-Regular";
+}

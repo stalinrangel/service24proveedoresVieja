@@ -1,0 +1,105 @@
+ion-content{
+  --background: var(--ion-color-secondary);
+}
+.btn-close{
+	--background: transparent;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    right: 0px;
+    top: 30px;
+}
+.text-close{
+	--background: transparent;
+    color: #fff;
+    font-size: 15px;
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    font-family: "Montserrat-Medium";
+}
+.or-spacer {
+	margin-top: 40px;
+	width: 100%;
+    position: relative;
+  
+  .mask { 
+    overflow:hidden; height:20px; 
+    &:after { 
+      content:''; 
+      display:block; margin:-25px auto 0;
+      width:100%; height:25px;  
+    	box-shadow: 0 0 1px #fff
+    }
+  }
+  span {
+    width: 90px;
+    height: 30px;
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: -15px;
+    left: 37%;
+    background: var(--ion-color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Muli-Regular";
+    font-size: 13px;
+  }
+}
+.box-cat{
+    text-align: center;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 2px;
+    font-family: "Roboto";
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+.text-dir{
+  text-align: center;
+  font-family: "Montserrat-Medium";
+}
+.text-dir2{
+  font-family: "Montserrat-Medium";
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+}
+.text-dir3{
+  font-size: 16px;
+  font-family: "Montserrat-Medium";
+  flex: 1;
+  margin: 10px 0px;
+}
+.content-colonia{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid;
+  margin-bottom: 15px;
+}
+.icon-arrow{
+	font-size: 18px;
+    margin-left: 10px;
+}
+ion-select{
+  --padding-start: 0px;
+}
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 0.9em;
+    height: 0.9em;
+  }
+  &[class*="custom-map"] {
+  	color: #fff !important;
+    mask-image: url('/assets/icon/icono-locacion.svg');
+  }
+}

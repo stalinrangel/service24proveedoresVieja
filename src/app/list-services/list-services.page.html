@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Servicios
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list mode="md">
+		<div *ngIf="services" style="margin-bottom: 50px;">
+			<ion-item lines="full" *ngFor="let item of services" mode="md">
+			  <ion-thumbnail slot="start" mode="md">
+			    <img src="{{item.imagen}}">
+			  </ion-thumbnail>
+		      <ion-label>
+		        <p>{{item.nombre}}</p>
+		        <p class="title-menu">{{item.descripcion}}</p>
+		        <p class="title-zona"><ion-icon name="arrow-dropup" class="custom1-map"></ion-icon> <span *ngFor="let item1 of item.zonas2">{{item1.nombre}}, </span></p>
+		      </ion-label>
+		      <div slot="end">
+		      	<p class="green-text" *ngIf="item.estado == 'ON'"><ion-icon name="arrow-dropright-circle"></ion-icon> Habilitado</p>
+		      	<p class="yellow-text" *ngIf="item.estado == 'OFF'"><ion-icon name="arrow-dropright-circle"></ion-icon> En Revisión</p>
+		      	<p class="green-text" *ngIf="item.estado == 'ED'"><ion-icon name="arrow-dropright-circle"></ion-icon> Editado</p>
+		      <ion-button (click)="editService(item)" mode="md">
+		      	<ion-icon name="create"></ion-icon>
+		      </ion-button>
+		      <ion-button (click)="presentConfirm(item)" mode="md">
+		      	<ion-icon name="trash"></ion-icon>
+		      </ion-button>
+		      </div>
+		    </ion-item>
+		    <p *ngIf="services.length == 0" class="text-empty">No tienes servicios asociados</p>
+		</div>
+	</ion-list>
+</ion-content>
+<ion-footer style="padding: 20px 15px;">
+	<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="addService()">Agregar servicio</ion-button>
+</ion-footer>

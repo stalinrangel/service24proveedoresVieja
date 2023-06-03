@@ -1,0 +1,28 @@
+ion-icon {
+  &[class*="custom1-"] {
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    vertical-align: baseline;
+    color: transparent !important;
+  }
+  &[class*="custom1-confirm"] {
+    width: 95px !important;
+    height: 95px !important;
+    margin-top: 40%;
+    background: url("/assets/icon/icono-confirmacion.svg") no-repeat 50% 50%;
+    background-size: contain;
+  }
+}
+.title-page{
+  color: #073763;
+  font-family: 'Montserrat-Bold';
+  font-size: 26px;
+}
+.btn-init{
+  --background: #007AFF !important;
+  margin: auto;
+  width: 90%;
+}

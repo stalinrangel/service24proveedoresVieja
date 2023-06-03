@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="tabs">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	  </ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Contrato
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+	<div *ngIf="contrat_url != null">
+		<div class="content-frame">
+			<iframe width="100%" height="100%" class="frame" [src]="contrat_url" name="iframe_a" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<br>
+		<ion-button *ngIf="!firma" expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="gotopage()">Ok</ion-button>
+	</div>
+	<div *ngIf="contrat_url != null && firma">
+		<ion-button *ngIf="signature == ''" expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="presentModal()">Firmar</ion-button>
+		<div *ngIf="signature != ''">
+			<ion-grid class="ion-no-padding">
+				<ion-row class="ion-no-padding">
+					<ion-col size="6">
+						<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="presentModal()">Firmar</ion-button>
+					</ion-col>
+					<ion-col size="6">
+						<ion-button expand="block" color="success" class="ion-text-capitalize btn-init" (click)="exportPdf()">Enviar</ion-button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</div>
+	<div *ngIf="planB">
+		<div class="padding-space2">
+			<p class="text-slide">Elige un plan de servicios:</p>
+			<div class="content-target">
+				<ion-card class="target-plan" *ngFor="let plan of plans" [ngClass]="{'select-target': select_plan == plan.id}">
+					<p class="item-recom" *ngIf="plan.recomendado == 1"><ion-icon name="ribbon"></ion-icon> Recomendado</p>
+					<div (click)="selectPlan(plan)">
+						<p class="name-plan">{{plan.tipo_plan}}</p>
+						<p class="price-plan" [ngClass]="{'discount': plan.descuento != 0}">${{plan.costo}}</p>
+						<p class="price-plan" *ngIf="plan.descuento != 0">${{plan.descuento}}</p>
+					</div>
+					<div class="icon-target" (click)="plan.show = !plan.show">
+						<ion-icon name="arrow-down" class="icon-price" [hidden]="plan.show"></ion-icon>
+						<ion-icon name="arrow-up" class="icon-price" [hidden]="!plan.show"></ion-icon>
+					</div>
+					<div [ngClass]="{'hiddenDes': !plan.show}" class="content-desplan">
+						<div class="overlay" *ngIf="!plan.show" (click)="plan.show = !plan.show"></div>
+						<div class="item-descP" *ngFor="let item of plan.descripcion" (click)="plan.show = !plan.show">
+							<ion-icon name="checkmark" class="icon-checkP"></ion-icon>
+							<p>
+								{{item.descripcion}}
+							</p>
+						</div>
+						<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" style="margin-top: 20px;width: 70%;" (click)="selectPlan(plan)">
+						Seleccionar</ion-button>
+					</div>
+				</ion-card>
+			</div>
+			<br><br>
+			<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init2" (click)="setPlan()">
+			Enviar</ion-button>
+		</div>
+	</div>
+</ion-content>

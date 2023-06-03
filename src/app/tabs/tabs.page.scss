@@ -1,0 +1,51 @@
+.tab-selected {
+  --background: #031F33;
+  backgroud: #031F33;
+}
+ion-tab-button {
+  --color: rgba(255,255,255,0.6);
+}
+ion-tab-bar{
+	--border: none;
+	height: 46px;
+}
+.bullet-icon{
+    color: #fff;
+    font-size: 25px;
+    height: auto;
+    margin: 0px;
+    line-height: 4px;
+}
+ion-icon {
+    &[class*="custom-"] {
+        vertical-align: middle;
+        $sz: 22px;
+        width: $sz;
+        height: $sz;
+        color: transparent !important;
+    }
+    &[class*="inicio"] {
+        background: url("/assets/icon/icono_inicio_off.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+    .tab-selected &[class*="inicio"] {
+        background: url("/assets/icon/icono_inicio_on.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+    &[class*="solicitud"] {
+        background: url("/assets/icon/icono_solicitud_off.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+    .tab-selected &[class*="solicitud"] {
+        background: url("/assets/icon/icono_solicitud_on.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+    &[class*="perfil"] {
+        background: url("/assets/icon/icono_perfil_off.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+    .tab-selected &[class*="perfil"] {
+        background: url("/assets/icon/icono_perfil_on.svg") no-repeat 50% 50%;
+        background-size: contain;
+    }
+}

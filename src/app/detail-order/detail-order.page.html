@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<ion-buttons slot="start" class="icon-back" default-href="/tabs/tab1">
+	   <ion-back-button text="" name="arrow-back" mode="md">
+        </ion-back-button>
+	</ion-buttons>
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Detalle
+    </ion-title>
+    <ion-buttons slot="end" class="icon-notify">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-dropup" class="custom-notify"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="content-profile">
+		<img src="{{user.imagen}}">
+		<div class="content-info">
+			<p class="title">{{user.nombre}}</p>
+			<ion-icon slot="icon-only" name="star" *ngFor="let current of [1, 2, 3, 4, 5]; let i = index" class="icon-star" [class.filled]="(i + 1 <= user.promedio)"></ion-icon>
+			<p class="order">Solicitud #{{data}}</p>
+			<p class="address"><ion-icon name="arrow-dropup" class="custom1-map"></ion-icon> {{user.direccion}}</p>
+		</div>
+	</div>
+	<div class="content-infoP">
+		<p><span>Para:</span> Mi</p>
+		<p *ngIf="service.producto_id != '1'"><span>Categoría:</span> {{service.categoria}}</p>
+		<p *ngIf="service.producto_id != '1'"><span>Servicio:</span> {{service.nombre}}</p>
+		<p><span>Fecha:</span> {{service.tiempo}} | {{service.hora}}</p>
+		<p><span>Lugar:</span> {{user.direccion}}</p>
+		<p><span>Observaciones:</span> {{service.referencia}}</p>
+		<p><span>Estado:</span> En espera</p>
+	</div>
+	<ion-button expand="block" class="ion-text-capitalize btn-init" *ngIf="service.estado == 2" (click)="accept()">Aceptar Solicitud</ion-button>
+	<ion-button expand="block" class="ion-text-capitalize btn-init btn-init1" (click)="presentModal1()">Cancelar Solicitud</ion-button>
+	<br>
+</ion-content>

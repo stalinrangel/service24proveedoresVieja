@@ -1,0 +1,29 @@
+<ion-content>
+	<div class="content-img">
+		<img src="{{user.imagen}}">
+		<h2>{{user.nombre}}</h2>
+	</div>
+	<div class="text-info">
+		¡Verifica o completa los siguientes campos para finalizar el registro!
+	</div>
+	<form [formGroup]="registerUserForm" class="padding-space">
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.nombre}">
+			<ion-input type="text" formControlName="nombre" placeholder="Nombre"></ion-input>
+		</ion-item>
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.email}">
+			<ion-input formControlName="email" placeholder="Correo electrónico"></ion-input>
+		</ion-item>
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.telefono}">
+			<ion-select formControlName="code" mode="md" cancelText="Cancelar" class="select-input">
+			  	<ion-select-option *ngFor="let item of codes" [value]="item.value">{{item.codigo}}</ion-select-option>
+			</ion-select>
+			<ion-input type="tel" formControlName="telefono" placeholder="Teléfono"></ion-input>
+		</ion-item>
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.zona}">
+			<ion-input type="text" formControlName="zona" placeholder="Seleccione la zona a la que pertenece" readonly (click)="selectZone()"></ion-input>
+		</ion-item>
+		<ion-button expand="block" color="secondary" class="ion-text-capitalize btn-init btn-register" (click)="register()">
+		Continuar</ion-button>
+	</form> 
+</ion-content>
+

@@ -1,0 +1,26 @@
+<ion-content>
+	<ion-buttons class="icon-back" (click)="goBack()">
+      <ion-button>
+        <ion-icon slot="icon-only"  name="arrow-back" class="icon-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+	<div class="content-img">
+		<img src="assets/logo_blanco.svg">
+		<h2>Recuperar contraseña</h2>
+	</div>
+	<br><br>
+	<form [formGroup]="registerUserForm" class="padding-space">
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.password}">
+			<ion-input [type]="password_type1" formControlName="password" placeholder="Contraseña"></ion-input>
+			<ion-icon slot="end" name="eye-off" class="icon-eye" *ngIf="password_type1 == 'password'" (click)="togglePasswordMode1()"></ion-icon>
+			<ion-icon slot="end" name="eye" class="icon-eye" *ngIf="password_type1 == 'text'" (click)="togglePasswordMode1()"></ion-icon>
+		</ion-item>
+		<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.rpassword}">
+			<ion-input [type]="password_type2" formControlName="rpassword" placeholder="Confirmar Contraseña" (keydown.space)="$event.preventDefault();"></ion-input>
+			<ion-icon slot="end" name="eye-off" class="icon-eye" *ngIf="password_type2 == 'password'" (click)="togglePasswordMode2()"></ion-icon>
+			<ion-icon slot="end" name="eye" class="icon-eye" *ngIf="password_type2 == 'text'" (click)="togglePasswordMode2()"></ion-icon>
+		</ion-item>
+		<ion-button expand="block" color="secondary" class="ion-text-capitalize btn-init btn-register" (click)="updatePassword()">
+		Actualizar Contraseña</ion-button>	
+	</form>
+</ion-content>

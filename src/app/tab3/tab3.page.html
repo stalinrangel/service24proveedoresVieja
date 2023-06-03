@@ -1,0 +1,169 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+    <ion-title class="ion-text-capitalize">
+      Perfil
+    </ion-title>
+    <ion-buttons slot="end" (click)="viewNotification()">
+      <ion-button>
+      	<div class="icon-bagde" *ngIf="show_notify"></div>
+        <ion-icon name="notifications" style="font-size: 25px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+	<div class="content-profile" [ngStyle]="{'background': 'linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(' + usuario.imagen + ') center center / cover no-repeat'}">
+		<img src="{{usuario.imagen}}">
+		<div class="content-info">
+			<p class="title">{{usuario.nombre}}</p>
+			<ion-icon slot="icon-only" name="star" *ngFor="let current of [1, 2, 3, 4, 5]; let i = index" class="icon-star" [class.filled]="(i + 1 <= promedio_calificacion)"></ion-icon>
+		</div>
+	</div>
+	<ion-segment [(ngModel)]="type" value="track" color="light">
+	    <ion-segment-button value="track" mode="md">
+	      <ion-label>Descripción</ion-label>
+	    </ion-segment-button>
+	    <ion-segment-button value="start" mode="md">
+	      <ion-label>Calificaciones</ion-label>
+	    </ion-segment-button>
+	</ion-segment>
+	<div *ngIf="type == 'track'">
+		<div class="content-infoP" *ngIf="status == 1 || status == 2">
+			<p class="address" *ngIf="usuario.direccion != ''"><ion-icon name="arrow-dropup" class="custom1-map"></ion-icon> {{usuario.direccion}}</p>
+			<!--p><span>Disponibilidad:</span> Lunes a Sábado 9:00 a 7:00 PM</p-->
+			<!--p><span>Zonas que atiende:</span> Allbrook, Bella Vista</p-->
+			<p class="title-services"><b>Servicios</b></p>
+			<p *ngFor="let item of services" class="item-services">- {{item.nombre}}</p>
+			<p *ngIf="services.length == 0" class="item-services">Aún no tienes servicios asociados.</p>
+		</div>
+		<div *ngIf="status == 3">
+			<p class="text-complete">Usted aún no posee ninguna información de perfil</p>
+			<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="completeRegister()">Completar Perfil</ion-button>
+		</div>
+		<div *ngIf="status == 4">
+			<p class="text-complete"><span>¡Felicidades!</span><br>Solicitud de registro enviada</p>
+			<ion-button expand="block" class="btn-init" style="text-transform: initial;" (click)="listService()">¡Inicia agregando tus servicios!</ion-button>
+		</div>
+		<ion-list class="list-menu">
+			<ion-item lines="full" (click)="editProfile()">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="person" class="icon-build"></ion-icon> Perfil</p>
+		      </ion-label>
+		    </ion-item>
+			<ion-item lines="full" (click)="listService()" *ngIf="status == 1 || status == 2 || status == 4">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="build" class="icon-build"></ion-icon> Gestión de Servicios</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="full" (click)="support()">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="arrow-dropup" class="custom-support"></ion-icon> Soporte</p>
+		      </ion-label>
+		    </ion-item>
+		    <!--ion-item lines="full">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="arrow-dropup" class="custom-comunity"></ion-icon> Comunidad</p>
+		      </ion-label>
+		    </ion-item-->
+		    <ion-item lines="full" (click)="payment()" *ngIf="status == 1 || status == 2">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="briefcase" class="icon-build"></ion-icon> Pagos</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="full" (click)="contrat()" *ngIf="status == 1 || status == 2 || status == 4">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="clipboard" class="icon-build"></ion-icon> Contrato</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="full" (click)="policy()">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="arrow-dropup" class="custom-privacity"></ion-icon> Avisos de Privacidad</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="full" (click)="terms()">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="arrow-dropup" class="custom-terms"></ion-icon> Términos y Condiciones</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="full" (click)="presentAlert()">
+		      <ion-label>
+		        <p class="title-menu"><ion-icon name="arrow-dropup" class="custom-contact2"></ion-icon> Contacto</p>
+		      </ion-label>
+		    </ion-item>
+		    <ion-item lines="none" class="ion-text-center item-login" (click)="presentConfirm()">
+		      <ion-label>
+		        <p>Cerrar Sesión</p>
+		      </ion-label>
+		    </ion-item>
+		</ion-list>
+		<p class="info-version">Service 24 Proveedores <br> Version 0.2</p>
+	</div>
+	<div *ngIf="type == 'start'">
+		<div *ngIf="calificaciones">
+			<div class="conten-item" *ngFor="let item of calificaciones;let even = even" [style.background]="even? '#FFFFFF' : '#F2F2F2'">
+				<ion-item lines="none">
+				    <ion-label class="label-item">
+				      <ion-icon slot="icon-only" name="star" *ngFor="let current of [1, 2, 3, 4, 5]; let i = index" class="icon-star2" [ngClass]="{'filled': i < item.puntaje}"></ion-icon>
+				      <p class="product-item">{{item.producto.nombre}}</p>
+				      <p class="comment-item">{{item.usuario.nombre}} - <i>{{item.comentario}}</i></p>
+				    </ion-label>
+				    <p slot="end" class="date-item">{{item.created_at | relativeTime}}</p>
+				</ion-item>
+			</div>
+			<p *ngIf="calificaciones.length == 0" class="text-empty">Aún no tienes calificaciones</p>
+		</div>
+		<div *ngIf="!calificaciones">
+			<div class="conten-item">
+				<ion-item lines="none">
+					<ion-label class="label-item">
+				      <ion-skeleton-text animated style="width: 70px;"></ion-skeleton-text>
+				      <p class="user-item"><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></p>
+				      <p class="comment-item"><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></p>
+				    </ion-label>
+				    <p slot="end" class="date-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+				</ion-item>
+			</div>
+			<div class="conten-item" style="background-color: #f2f2f2f2;">
+				<ion-item lines="none">
+				    <ion-label class="label-item">
+				      <ion-skeleton-text animated style="width: 70px;"></ion-skeleton-text>
+				      <p class="user-item"><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></p>
+				      <p class="comment-item"><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></p>
+				    </ion-label>
+				    <p slot="end" class="date-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+				</ion-item>
+			</div>
+			<div class="conten-item">
+				<ion-item lines="none">
+				    <ion-label class="label-item">
+				      <ion-skeleton-text animated style="width: 70px;"></ion-skeleton-text>
+				      <p class="user-item"><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></p>
+				      <p class="comment-item"><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></p>
+				    </ion-label>
+				    <p slot="end" class="date-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+				</ion-item>
+			</div>
+			<div class="conten-item" style="background-color: #f2f2f2f2;">
+				<ion-item lines="none">
+				    <ion-label class="label-item">
+				      <ion-skeleton-text animated style="width: 70px;"></ion-skeleton-text>
+				      <p class="user-item"><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></p>
+				      <p class="comment-item"><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></p>
+				    </ion-label>
+				    <p slot="end" class="date-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+				</ion-item>
+			</div>
+			<div class="conten-item">
+				<ion-item lines="none">
+				    <ion-label class="label-item">
+				      <ion-skeleton-text animated style="width: 70px;"></ion-skeleton-text>
+				      <p class="user-item"><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></p>
+				      <p class="comment-item"><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></p>
+				    </ion-label>
+				    <p slot="end" class="date-item"><ion-skeleton-text animated style="width: 55px;"></ion-skeleton-text></p>
+				</ion-item>
+			</div>
+		</div>
+	</div>
+</ion-content>

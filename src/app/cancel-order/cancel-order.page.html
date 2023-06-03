@@ -1,0 +1,12 @@
+<ion-content class="ion-padding">
+	<ion-button class="btn-close" (click)="closeModal()">
+		<ion-icon slot="icon-only" name="close"></ion-icon>
+	</ion-button>
+	<h2 class="title-modal">¿Desea cancelar la solicitud #{{id}}?</h2>
+	<p class="info-modal">Por favor, indique el motivo de cancelación de la solicitud.</p>
+	<ion-item lines="none" class="item-info">
+	  <ion-textarea placeholder="Agrega un motivo..." [(ngModel)]="Cancel.comentario" class="area-info" rows="3" cols="20"></ion-textarea>
+	</ion-item>
+	<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="sendCancel()">Confirmar</ion-button>
+</ion-content>
+

@@ -1,0 +1,24 @@
+.text-date{
+	text-align: right;
+    font-size: 10px;
+    font-family: 'Muli-SemiBold';
+}
+.text-msg{
+	font-family: 'Muli';
+    font-size: 13px;
+    ion-icon{
+		font-size: 15px;
+	    margin-right: 5px;
+	    color: #073763;
+	}
+}
+ion-list{
+	padding-top: 0px;
+}
+.text-empty{
+	color: #4D4D4D;
+    text-align: center;
+    margin-top: 75px;
+    font-size: 14px;
+    font-family: "Muli-Regular";
+}

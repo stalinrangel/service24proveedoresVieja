@@ -1,0 +1,86 @@
+.title-modal{
+	color: #000;
+    font-size: 14px;
+    text-align: center;
+    padding: 0px 30px;
+    font-family: "Montserrat-Bold";
+    margin-top: 40px;
+}
+.info-modal{
+	color: #4D4D4D;
+    text-align: center;
+    font-family: 'Muli-Regular';
+    font-size: 14px;
+}
+.item-input{
+	color: #4D4D4D;
+    background-color: #F2F2F2;
+    border-radius: 4px;
+    font-family: "Muli-Regular";
+    font-size: 15px;
+    --background: #F2F2F2;
+    --border-radius: 4px;
+    margin: 25px 0px;
+}
+.item-info{
+	--background: #F2F2F2;
+    --border-radius: 4px;
+    margin: 20px 0px;
+}
+.btn-init2{
+    margin: 10px 0px;
+}
+.btn-close{
+	--background: transparent;
+    color: #808080;
+    font-size: 10px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.danger{
+    border: 2px solid #B71C1C;
+    border-radius: 3px;
+}
+#countdown {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number {
+  color: white;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: white;
+  fill: none;
+  animation: countdown 10s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}

@@ -1,0 +1,26 @@
+<ion-content class="ion-padding">
+	<ion-button class="btn-close" (click)="closeModal1()">
+		<ion-icon slot="icon-only" name="close"></ion-icon>
+	</ion-button>
+	<h2 class="title-modal">Verificar número telefónico</h2>
+	<p class="info-modal">Se enviará un SMS a tu número telefónico con un código de verificación para validar tu identidad.</p>
+	<div *ngIf="step == 1" style="margin-top: 50px;">
+		<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="sendR()">Enviar Código</ion-button>
+		<p class="title-modal" style="margin-top: 25px; text-decoration: underline;" (click)="closeModal(2)">Omitir verificación</p>			
+	</div>		
+	<div *ngIf="step == 2">
+		<p class="info-modal" style="margin-bottom: 15px;">Por favor, ingresa el código en el siguiente campo:</p>
+		<form [formGroup]="registerUserForm">
+			<ion-item lines="none" class="item-input" [ngClass]="{'danger': formErrors.code}" style="margin-top: 20px;">
+				<ion-input type="text" placeholder="Código de verificación" formControlName="code"></ion-input>
+			</ion-item>
+			<ion-button expand="block" class="ion-text-capitalize btn-init" (click)="saveR()">Verificar</ion-button>
+		</form>
+		<p class="info-modal">{{counter | formatTime}}</p>
+		<div>
+			<p class="info-modal">Si aún no ha recibido el código</p>
+			<p class="title-modal" style="margin-top: 25px; text-decoration: underline;" (click)="send1R()">Envía de nuevo el SMS</p>	
+			<p class="title-modal" style="margin-top: 25px; text-decoration: underline;" (click)="closeModal(2)">Omitir verificación</p>	
+		</div>
+	</div>
+</ion-content>

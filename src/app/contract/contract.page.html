@@ -1,0 +1,48 @@
+<ion-content class="ion-padding">
+	<div>
+		
+		<div class="content-frame">
+			<iframe width="100%" height="100%" class="frame" [src]="contrat_url" name="iframe_a" frameborder="0" allowfullscreen></iframe>
+		</div>
+
+		<ion-grid style="margin-top: 20px;">
+		  <ion-row>
+		    <ion-col size="12">
+		    	<div class="content-line">
+		    		<img [src]="signature" *ngIf="signature != ''" style="height: 100%;">
+		    	</div>
+		    </ion-col>
+		  </ion-row>
+		  <ion-row class="ion-no-padding">
+		    <ion-col size="12">
+		    	<div style="border-bottom: 1px solid #000;margin-bottom: 10px;"></div>
+			    <p class="text-firm" *ngIf="data.tipo == '1'">{{data.nombre}}</p>
+			    <p class="text-firm" *ngIf="data.tipo == '2'">{{data.contacto_nombre}}</p>
+		    	<p class="text-firm" *ngIf="data.tipo == '1'">C.I. No. {{data.cedula}}</p>
+		    	<p class="text-firm" *ngIf="data.tipo == '2'">C.I. No. {{data.contacto_cedula}}</p>
+		    </ion-col>
+		  </ion-row>
+		</ion-grid>
+	</div>
+	<br>
+	<div *ngIf="signature == ''">
+		<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="presentModal()">Firmar</ion-button>
+	</div>
+	<div *ngIf="signature != '' && contrat_url">
+		<ion-grid class="ion-no-padding">
+			<ion-row class="ion-no-padding">
+				<ion-col size="6">
+					<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="presentModal()">Firmar</ion-button>
+				</ion-col>
+				<ion-col size="6">
+					<ion-button expand="block" color="success" class="ion-text-capitalize btn-init" (click)="exportPdf()">Enviar</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<!--ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="gotopage()">Atras</ion-button-->
+	</div>
+	<div *ngIf="contrat_url">
+		<ion-button expand="block" color="tertiary" class="ion-text-capitalize btn-init" (click)="gotopage()">Volver al Perfil</ion-button>
+	</div>
+
+</ion-content>

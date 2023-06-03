@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="secondary" mode="md">
+  	<!--ion-buttons slot="start">
+	   	<ion-button (click)="closeModal()">
+       		<ion-icon md="md-close" ios="md-close"></ion-icon>
+      	</ion-button>
+	</ion-buttons-->
+    <ion-title class="ion-text-capitalize ion-text-center">
+      Seleccione las zonas
+    </ion-title>
+    <!--ion-buttons slot="end" class="icon-notify">
+      <ion-button (click)="SaveModal()">
+        <ion-icon md="md-checkmark" ios="md-checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list mode="md">
+        <ion-item (click)="toggleSelectAll()" mode="md">
+            <ion-checkbox slot="start" [(ngModel)]="allSelected" mode="md"></ion-checkbox>
+            <ion-label style="color: #0a3763;" mode="md">Seleccionar todas</ion-label>
+        </ion-item>
+        <ion-item *ngFor="let item of zones" mode="md">
+        	<ion-checkbox slot="start" [(ngModel)]="item.isChecked" (click)="changeZone(item)" mode="md"></ion-checkbox>
+		    <ion-label mode="md">{{item.nombre}}</ion-label>
+		</ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer style="padding: 5px;">
+	<ion-button expand="block" color="secondary" style="width: 90%;margin: auto;" class="ion-text-capitalize btn-init btn-register" (click)="SaveModal()">Aceptar</ion-button>
+</ion-footer>

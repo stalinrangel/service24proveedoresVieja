@@ -1,0 +1,119 @@
+ion-footer {
+  height: 255px; 
+}
+
+.line-breaker {
+  white-space: pre-line; 
+}
+
+.input-wrap {
+  padding: 5px;
+  display: flex; 
+  background-color: #F2F2F2;
+}
+.input-wrap textarea {
+  flex: 1;
+  border: 0;
+  color: #4D4D4D;
+  font-family: "Muli-Regular"; 
+  background-color: #F2F2F2;
+  font-size: 15px;
+  outline: none;
+}
+.btn-send{
+  --background: #f78319;
+  height: 44px;
+  margin: 0px;
+}
+.message-wrap {
+  padding: 16px; 
+}
+.message-wrap .message {
+  position: relative;
+  padding: 7px 0; 
+}
+.message-wrap .message .user-img {
+  position: absolute;
+  border-radius: 45px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.36); 
+  top: 20px;
+}
+.message-wrap .message .msg-detail {
+  width: 100%;
+  display: inline-block; 
+}
+.message-wrap .message .msg-detail p {
+  margin: 0;
+  font-family: "Muli-Regular";
+  font-size: 13px;  
+}
+.message-wrap .message .msg-detail .msg-info p {
+  font-size: 8px;
+  font-family: "Muli-Regular";
+  color: #9E9E9E; 
+}
+.message-wrap .message .msg-detail .msg-content {
+  position: relative;
+  margin-top: 5px;
+  border-radius: 4px;
+  padding: 8px 9px;
+  background-color: #f2f2f2;
+  color: #4D4D4D;
+  width: auto;
+  max-width: 80%; 
+}
+.message-wrap .message .msg-detail .msg-content span.triangle {
+  background-color: #F2F2F2;
+  border-radius: 2px;
+  height: 8px;
+  width: 8px;
+  top: 12px;
+  display: block;
+  border-style: solid;
+  border-color: #F2F2F2;
+  border-width: 1px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute; 
+}
+.message-wrap .message.left .msg-content {
+  background-color: #F2F2F2;
+  float: left; 
+}
+.message-wrap .message.left .msg-detail {
+  padding-left: 60px; 
+}
+.message-wrap .message.left .user-img {
+  left: 0; 
+}
+.message-wrap .message.left .msg-detail .msg-content span.triangle {
+  border-top-width: 0;
+  border-right-width: 0;
+  left: -5px; 
+}
+.message-wrap .message.right .msg-detail {
+  padding-right: 60px; 
+}
+.message-wrap .message.right .msg-detail .msg-info {
+  text-align: right; 
+}
+.message-wrap .message.right .user-img {
+  background-color: #e0e0e0 !important;
+  right: 0; 
+}
+.message-wrap .message.right ion-spinner {
+  position: absolute;
+  right: 10px;
+  top: 60px; 
+}
+.message-wrap .message.right .msg-detail .msg-content {
+  float: right; 
+}
+.message-wrap .message.right .msg-detail .msg-content span.triangle {
+  border-bottom-width: 0;
+  border-left-width: 0;
+  right: -5px; 
+}

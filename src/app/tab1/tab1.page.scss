@@ -1,0 +1,126 @@
+ion-title {
+    width: 100%;
+    font-family: "Montserrat-Bold";
+    font-size: 18px;
+}
+.content-title{
+	background-color: #051e33;
+    padding: 15px;
+    text-align: center;
+    color: #ffffff;
+    font-family: "Montserrat-Bold";
+    font-size: 18px;
+}
+.conten-item{
+	padding: 15px 0px;
+	.title-item{
+		margin: 0px;
+	    padding: 0px 16px;
+	    color: #000000;
+	    font-family: "Montserrat-Bold";
+	    font-size: 15px;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	.status-item{
+		font-family: "Muli-Regular";
+	    font-size: 12px;
+	    color: #4D4D4D;
+	    margin-top: 0px;
+	}
+	.start-item{
+		position: absolute;
+	    bottom: 5px;
+	    margin: 0px;
+	    right: 10px;
+	}
+}
+.label-item{
+	margin: 5px 0px 0px;
+	.dir-item{
+		font-family: "Montserrat-Medium";
+		margin: 1px 0px;
+		color: #4D4D4D;
+	}
+	p{
+		font-family: "Muli-Regular";
+		color: #000000;
+	}
+	.date-item{
+		font-size: 14px;
+		color: #1e2023;
+	}
+}
+.item{
+	--background: transparent;
+}
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+  &[class*="custom-map"] {
+  	color: var(--ion-color-secondary) !important;
+    mask-image: url('/assets/icon/icono-locacion.svg');
+  }
+}
+.custom-skeleton ion-skeleton-text {
+  line-height: 13px;
+}
+
+.custom-skeleton ion-skeleton-text:last-child {
+  margin-bottom: 5px;
+}
+.text-empty{
+	color: #4D4D4D;
+    text-align: center;
+    margin-top: 75px;
+    font-size: 14px;
+    font-family: "Muli-Regular";
+}
+ion-refresher{
+	position: relative !important;
+}
+.btn-init{
+	--background: #007AFF;
+	width: 90%;
+    margin: auto;
+}
+.text-complete{
+	color: #000;
+    padding: 25px 30px;
+    text-align: center;
+    margin-top: 70px;
+    font-family: "Muli-Regular";
+}
+.content-img{
+  display: flex;
+  align-items: center;
+  padding: 0px 16px;
+  img{
+    width: 34px;
+    height: 34px;
+    border-radius: 50em;
+  }
+}
+.subtitle-item{
+  color: #4d4d4d;
+  margin: 1px 0px 0px 10px;
+  font-size: 13px;
+  font-weight: normal;
+  font-family: "Muli-Regular";
+}
+.color-yellow{
+  background-color: #FFC107;
+    color: #fff !important;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 25px;
+    max-width: 80px;
+    margin: auto;
+}

@@ -1,0 +1,42 @@
+h3{
+	color: #000;
+	font-family: 'Montserrat-Bold';
+	font-size: 16px;
+}
+p{
+	color: #000;
+	font-family: "Muli-Regular";
+	font-size: 13px;
+    text-align: justify;
+}
+.center{
+	text-align: center;
+}
+table{
+	width: 100%;
+}
+tr{
+	text-align: left;
+}
+.content-line{
+	height: 60px;
+	padding-bottom: 0px;
+	text-align: center;
+}
+.text-firm{
+	margin: 0px;
+	text-align: center;
+}
+.printable-content {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    .printable-area {
+      width: 595px;
+      height: 1340px;
+    }
+}
+.content-frame{
+	height: 60vh;
+	-webkit-overflow-scrolling: touch;
+	overflow-y: scroll;
+}
